@@ -34,11 +34,13 @@ def route_json(*args, **kwargs):
     payload=bottle.request.json
     obj = dict(
         formname=payload.get("formname", None),
+        namespace=payload.get("namespace", None),
+        prefix=payload.get("prefix", None),
         path=payload.get("path", None),
         datetime=get_timestamp(),
         payload=payload
     )
-    filename = obj.get("formname", "unnamed")
+    filename = obj.get("namespace", "unnamed")
     upload, object_path = store_object("json", f"{filename}.json", json_dumps(obj))
     bottle.response.status = upload and 201 or 500
     bottle.response.content_type = "application/json"
