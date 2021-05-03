@@ -33,15 +33,20 @@ def route_file(*args, **kwargs):
 def route_json(*args, **kwargs):
     payload=bottle.request.json
     obj = dict(
+        record_name=payload.get("record_name", "unnamed"),
+        namespace=payload.get("namespace", "no_namespace"),
         formname=payload.get("formname", None),
-        namespace=payload.get("namespace", None),
         prefix=payload.get("prefix", None),
         path=payload.get("path", None),
         datetime=get_timestamp(),
         payload=payload
     )
-    filename = obj.get("namespace", "unnamed")
-    upload, object_path = store_object("json", f"{filename}.json", json_dumps(obj))
+    namespace = obj.get("namespace")
+    record_name = obj.get("record_name")
+    upload, object_path = store_object(
+        f"json/{namespace}",
+        f"{record_name}.json",
+        json_dumps(obj))
     bottle.response.status = upload and 201 or 500
     bottle.response.content_type = "application/json"
     return dict(upload=upload, ref=object_path)
