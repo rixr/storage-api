@@ -10,9 +10,13 @@ from modules.cors import enable_cors
 
 app = bottle.Bottle()
 
+
 @app.route("/form", method=["POST", "OPTIONS"])
-@enable_cors
 def route_form(*args, **kwargs):
+    """
+    This function should provide a way to POST an arbirary
+    form and store it as a JSON file.
+    """
     bottle.response.status = 501
     bottle.response.content_type = "application/json"
     return {}
@@ -21,8 +25,14 @@ def route_form(*args, **kwargs):
 @app.route("/file", method=["POST", "OPTIONS"])
 @enable_cors
 def route_file(*args, **kwargs):
+    """
+    This function provides a way to store an arbirary file.
+    """
     form_file = bottle.request.files.get("file")
-    upload, object_path = store_object("files", form_file.filename, form_file.file)
+    upload, object_path = store_object(
+        "files",
+        form_file.filename, form_file.file
+    )
     bottle.response.status = upload and 201 or 500
     bottle.response.content_type = "application/json"
     return dict(upload=upload, ref=object_path)
@@ -31,15 +41,15 @@ def route_file(*args, **kwargs):
 @app.route("/json", method=["POST", "OPTIONS"])
 @enable_cors
 def route_json(*args, **kwargs):
-    payload=bottle.request.json
+    payload = bottle.request.json
     obj = dict(
-        record_name=payload.get("record_name", "unnamed"),
-        namespace=payload.get("namespace", "no_namespace"),
-        formname=payload.get("formname", None),
-        prefix=payload.get("prefix", None),
-        path=payload.get("path", None),
         datetime=get_timestamp(),
-        payload=payload
+        formname=payload.get("formname", None),
+        namespace=payload.get("namespace", "no_namespace"),
+        path=payload.get("path", None),
+        payload=payload,
+        prefix=payload.get("prefix", None),
+        record_name=payload.get("record_name", "unnamed"),
     )
     namespace = obj.get("namespace")
     record_name = obj.get("record_name")
