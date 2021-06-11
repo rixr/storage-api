@@ -1,23 +1,18 @@
-from urllib.parse import urlparse
 from functools import wraps
 from os import environ
-from bottle import response, request, HTTPResponse
+from bottle import response, request
 
 
 def enable_cors(_route_function):
     @wraps(_route_function)
     def _enable_cors(*args, **kwargs):
-        # set CORS headers
-        http_origin = request.headers.get(
-            "ORIGIN",
-            request.headers.get("HTTP_ORIGIN", None)
-        )
+        http_origin = request.headers.get("ORIGIN", None)
         allowed_hosts = environ.get("CORS_DOMAINS", "").split(",")
         allowed_headers = [
-                "Access-Control-Allow-Origin",
-                "Authorization",
-                "Content-Type"
-            ]
+            "Access-Control-Allow-Origin",
+            "Authorization",
+            "Content-Type"
+        ]
         allowed_methods = "GET, POST, DELETE, PUT, OPTIONS"
         if http_origin in ["https://ekiim.xyz", *allowed_hosts]:
             response.headers["Access-Control-Allow-Origin"] = http_origin
