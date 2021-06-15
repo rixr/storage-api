@@ -1,7 +1,5 @@
 from os import environ
-from datetime import datetime
 from json import dumps as json_dumps
-import base64
 import bottle
 from modules.cors import enable_cors
 import modules.utils as utils
