@@ -1,99 +1,64 @@
 from os import environ
 from datetime import datetime
 from json import dumps as json_dumps
-from pathlib import Path
-
+import base64
 import bottle
-from google.cloud import storage
-
 from modules.cors import enable_cors
+import modules.utils as utils
+
+STORAGE_METHOD = environ["STORAGE_METHOD"]
+if STORAGE_METHOD == 'LOCAL':
+    print("Using local storage")
+    from modules.storage import store_bytes, store_string, query_storage
+elif STORAGE_METHOD == 'GCLOUD':
+    print("Using gcloud storage")
+    from modules.gstorage import store_bytes, store_string
+else:
+    raise Exception("Storage method not set")
 
 app = bottle.Bottle()
-
-
-@app.route("/form", method=["POST", "OPTIONS"])
-def route_form(*args, **kwargs):
-    """
-    This function should provide a way to POST an arbirary
-    form and store it as a JSON file.
-    """
-    bottle.response.status = 501
-    bottle.response.content_type = "application/json"
-    return {}
 
 
 @app.route("/file", method=["POST", "OPTIONS"])
 @enable_cors
 def route_file(*args, **kwargs):
     """
-    This function provides a way to store an arbirary file.
+    This function provides a way to store a single file.
+    It recieves a regular html form with a single field named
+    `file`.
     """
-    form_file = bottle.request.files.get("file")
-    upload, object_path = store_object(
-        "files",
-        form_file.filename, form_file.file
-    )
-    bottle.response.status = upload and 201 or 500
+    file = bottle.request.files.get("file")
+    store_bytes("files", file.filename, file.file.read())
+    bottle.response.status = 201
     bottle.response.content_type = "application/json"
-    return dict(upload=upload, ref=object_path)
+    return dict(store="success")
 
 
 @app.route("/json", method=["POST", "OPTIONS"])
 @enable_cors
 def route_json(*args, **kwargs):
     payload = bottle.request.json
-    obj = dict(
-        datetime=get_timestamp(),
-        formname=payload.get("formname", None),
-        namespace=payload.get("namespace", "no_namespace"),
-        path=payload.get("path", None),
+    now_str = utils.get_timestamp()
+    _hash = f"{now_str}_hash_{hash((now_str, tuple(payload.keys())))}"
+    formname = payload.get("formname", None)
+    data = dict(
+        ref=_hash,
+        datetime=now_str,
+        formname=formname,
         payload=payload,
-        prefix=payload.get("prefix", None),
-        record_name=payload.get("record_name", "unnamed"),
+        source=payload.get("source")
     )
-    namespace = obj.get("namespace")
-    record_name = obj.get("record_name")
-    upload, object_path = store_object(
-        f"json/{namespace}",
-        f"{record_name}.json",
-        json_dumps(obj))
-    bottle.response.status = upload and 201 or 500
+    store_string("json", f"{_hash}.json", json_dumps(data))
+    bottle.response.status = 201
     bottle.response.content_type = "application/json"
-    return dict(upload=upload, ref=object_path)
+    return dict(store="success", ref=_hash)
 
 
-def get_json_source(data):
-    data.get("formname", data.get("source", {}).get(""))
-
-
-def get_timestamp():
-    return datetime.now().strftime("%Y-%m-%d_%H:%M:%S.%f")
-
-
-def timestamp_filename(filename):
-    timestamp = get_timestamp()
-    return "_".join([timestamp, filename])
-
-
-def storage_blob(collection, filename):
-    client = storage.Client()
-    bucket = client.get_bucket(environ["GCLOUD_BUCKET"])
-    file = Path(filename)
-    object_path = str(
-        Path(collection) / file.parent / timestamp_filename(file.name)
-    )
-    return bucket.blob(object_path), object_path
-
-
-def store_object(collection, filename, data):
-    returnable = False, None
-    try:
-        blob, object_path = storage_blob(collection, filename)
-        if isinstance(data, str):
-            blob.upload_from_string(data)
-        else:
-            blob.upload_from_file(data)
-        returnable = True, object_path
-    except Exception as e:
-        print(e)
-    return returnable
+@app.route("/query", method=["GET", "OPTIONS"])
+@app.route("/query/", method=["GET", "OPTIONS"])
+@app.route("/query/<file:path>", method=["GET", "OPTIONS"])
+@enable_cors
+def query(*args, file="", **kwargs):
+    bottle.response.status = 200
+    bottle.response.content_type = "application/json"
+    return query_storage(file)
