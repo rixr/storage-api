@@ -13,3 +13,6 @@ LOCAL_API_STORAGE=../xyz-ekiim-api-storage
 pull:
 	mkdir -p $(LOCAL_API_STORAGE)
 	gsutil rsync -R $(BUCKET_URI) $(LOCAL_API_STORAGE)
+
+push:
+	echo "Pushing"
