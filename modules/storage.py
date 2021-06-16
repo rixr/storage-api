@@ -1,4 +1,5 @@
 from os import environ
+from mimetypes import guess_type
 from pathlib import Path
 
 try:
@@ -24,6 +25,7 @@ def store_string(collection, filename, text):
     target = get_file_to_store(collection, filename)
     target.write_text(text)
 
+
 def query_storage(path=""):
     target = (storage_dir / path)
     if not target.exists():
@@ -35,10 +37,12 @@ def query_storage(path=""):
             content=[str(p.relative_to(storage_dir)) for p in target.iterdir()]
         )
     elif target.is_file():
+        mime = (guess_type(str(target)) or ["application/octet-stream"])[0]
         return dict(
             path=str(target.relative_to(storage_dir)),
             type="file",
             metadata=dict(
+                mime=mime,
                 size=target.stat().st_size,
             )
         )
