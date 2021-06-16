@@ -7,10 +7,12 @@ service.
 """
 
 import bottle
+import routes.auth
 import routes.storage
 
 app = bottle.Bottle()
 
+app.mount("/auth", routes.auth.app)
 app.mount("/storage", routes.storage.app)
 
 
