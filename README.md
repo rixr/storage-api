@@ -15,3 +15,14 @@ _Suggestion:_ Copy `example.env` to `.env`, and then overwrite the values
 in that file.
 
 This project can be deployed as a _Google Cloud Run_ service.
+
+## Development Instructions
+
+First you should clone the repository with the `git clone <project-url>` command.
+
+Make sure you have `python39` and `pipenv` installed on your system.
+
+Once cloned you should execute `pipenv install`, and if this was successful you can
+go ahead an run `pipenv run start` which should run a `http` server powered by
+`bottle.py` at `http://0.0.0.0:8080`.
+
