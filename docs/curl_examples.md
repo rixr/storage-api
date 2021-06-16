@@ -18,3 +18,5 @@ curl -vq http://localhost:8080/storage/json \
     -H 'ORIGIN: http://example.com' \
     2>&1 | grep '^<'
 ```
+
+
