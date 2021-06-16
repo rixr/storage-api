@@ -20,3 +20,35 @@ curl -vq http://localhost:8080/storage/json \
 ```
 
 
+If you want to store a json file using, you should send a request as
+
+```
+POST /storage/json
+ORIGIN: http://localhost:1234
+Content-Type: application/json
+
+{
+ "json": "data"
+}
+```
+
+The curl command should be 
+
+```
+curl -vq http://localhost:8080/storage/json \
+    -X POST \
+    -H 'ORIGIN: http://localhost:1234' \
+    -H 'Content-Type: application/json' \
+    --data '{ "json": "data" }'
+```
+
+If you `json` data is stored in a file (let's say `foo.json`) you can run
+
+
+```
+curl -vq http://localhost:8080/storage/json \
+    -X POST \
+    -H 'ORIGIN: http://localhost:1234' \
+    -H 'Content-Type: application/json' \
+    --data @./foo.json
+```
