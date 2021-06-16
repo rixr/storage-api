@@ -37,7 +37,7 @@ def route_file(*args, **kwargs):
 def route_json(*args, **kwargs):
     payload = bottle.request.json
     now_str = utils.get_timestamp()
-    _hash = f"{now_str}_hash_{hash((now_str, tuple(payload.keys())))}"
+    _hash = f"{now_str}_hash_{hash((now_str, tuple(payload.keys())))}".replace(":", "=")
     formname = payload.get("formname", None)
     data = dict(
         ref=_hash,
