@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 bottle = "*"
 google-cloud-storage = "*"
+pyjwt = "*"
+peewee = "*"
 
 [dev-packages]
 
