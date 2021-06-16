@@ -1,5 +1,5 @@
-from os import environ
 from json import dumps as json_dumps
+from os import environ
 import bottle
 from modules.cors import enable_cors
 import modules.utils as utils
@@ -37,7 +37,9 @@ def route_file(*args, **kwargs):
 def route_json(*args, **kwargs):
     payload = bottle.request.json
     now_str = utils.get_timestamp()
-    _hash = f"{now_str}_hash_{hash((now_str, tuple(payload.keys())))}".replace(":", "=")
+    _hash = (
+        f"{now_str}_hash_{hash((now_str, tuple(payload.keys())))}"
+    ).replace(":", "=")
     formname = payload.get("formname", None)
     data = dict(
         ref=_hash,
