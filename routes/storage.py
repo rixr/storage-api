@@ -3,6 +3,7 @@ from os import environ
 import bottle
 from modules.cors import enable_cors
 import modules.utils as utils
+from modules.auth import auth_required
 
 STORAGE_METHOD = environ["STORAGE_METHOD"]
 if STORAGE_METHOD == 'LOCAL':
@@ -68,6 +69,7 @@ def route_json(*args, **kwargs):
 @app.route("/query/", method=["GET", "OPTIONS"])
 @app.route("/query/<file:path>", method=["GET", "OPTIONS"])
 @enable_cors
+@auth_required
 def query(*args, file="", **kwargs):
     bottle.response.status = 200
     bottle.response.content_type = "application/json"
@@ -76,6 +78,7 @@ def query(*args, file="", **kwargs):
 
 @app.route("/download/<file:path>", method=["GET", "OPTIONS"])
 @enable_cors
+@auth_required
 def download(*args, file="", **kwargs):
     bottle.response.status = 200
     mime, _bytes = get_storage_file(file)
