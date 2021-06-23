@@ -47,3 +47,11 @@ def query_storage(path=""):
             )
         )
     return {}
+
+
+def get_storage_file(path=""):
+    target = (storage_dir / path)
+    if not target.exists() or not target.is_file():
+        raise Exception("Does not exists")
+    mime = (guess_type(str(target)) or ["application/octet-stream"])[0]
+    return mime, target.read_bytes()

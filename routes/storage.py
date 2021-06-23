@@ -7,7 +7,12 @@ import modules.utils as utils
 STORAGE_METHOD = environ["STORAGE_METHOD"]
 if STORAGE_METHOD == 'LOCAL':
     print("Using local storage")
-    from modules.storage import store_bytes, store_string, query_storage
+    from modules.storage import (
+        store_bytes,
+        store_string,
+        query_storage,
+        get_storage_file
+    )
 elif STORAGE_METHOD == 'GCLOUD':
     print("Using gcloud storage")
     from modules.gstorage import store_bytes, store_string
@@ -62,3 +67,12 @@ def query(*args, file="", **kwargs):
     bottle.response.status = 200
     bottle.response.content_type = "application/json"
     return query_storage(file)
+
+
+@app.route("/download/<file:path>", method=["GET", "OPTIONS"])
+@enable_cors
+def download(*args, file="", **kwargs):
+    bottle.response.status = 200
+    mime, _bytes = get_storage_file(file)
+    bottle.response.content_type = mime
+    return _bytes
