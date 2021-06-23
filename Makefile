@@ -1,5 +1,7 @@
 .PHONY: push, pull
 
+DOCKER_IMAGE_NAME := storage-api
+
 # This value is the URI for the bucket or
 # bucket with path corresponding to the storage you
 # want to sync.
@@ -16,3 +18,9 @@ pull:
 
 push:
 	echo "Pushing"
+
+build:
+	docker build -t $(DOCKER_IMAGE_NAME) .
+
+run:
+	docker run -p 8080:8080 --env-file .env $(DOCKER_IMAGE_NAME):latest
