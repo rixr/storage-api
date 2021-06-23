@@ -15,7 +15,12 @@ if STORAGE_METHOD == 'LOCAL':
     )
 elif STORAGE_METHOD == 'GCLOUD':
     print("Using gcloud storage")
-    from modules.gstorage import store_bytes, store_string
+    from modules.gstorage import (
+        store_bytes,
+        store_string,
+        query_storage,
+        get_storage_file
+    )
 else:
     raise Exception("Storage method not set")
 
