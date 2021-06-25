@@ -41,3 +41,16 @@ Once cloned you should execute `pipenv install`, and if this was successful you 
 go ahead an run `pipenv run start` which should run a `http` server powered by
 `bottle.py` at `http://0.0.0.0:8080`.
 
+
+# Contribute to the project
+
+If you want to write a module that uses this project, please
+name space every file in modules, routes, and docs.
+
+Try and keep it to one file per directory.
+
+If you are using storage, name pace your directories, and name space
+your database tables manually and keep the database interface 
+friendly.
+
+And example would be `dell-warranty`
