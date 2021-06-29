@@ -1,4 +1,4 @@
-# Dell Waranty Query and Store
+# Licenses Checker Query and Store
 
 Este proyecto almacena licencias en archivos `.dat` para la utilización del software de diagnóstico "Offboard Diagnostic Information System", y consulta la fecha de creación de la licencia y el número serial del equipo asignado a la licencia.
 
