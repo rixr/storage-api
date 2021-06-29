@@ -10,7 +10,7 @@ Consiste en:
 | Path                  | Descripción                                     |
 | --------------------- | ----------------------------------------------- |
 | /licenses/login       | Autenticación de usuarios                       |
-| /licenses/new         | Agrega un nuevo registro                        |
+| /licenses/store         | Agrega un nuevo registro                        |
 | /licenses/info/<id>   | Muestra toda la información obtenida del equipo |
 
 
