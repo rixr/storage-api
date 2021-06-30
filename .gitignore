@@ -5,3 +5,5 @@ storage/
 __pycache__/
 *.py[cod]
 *$py.class
+database.db
+logs/
