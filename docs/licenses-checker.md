@@ -27,15 +27,14 @@ Se cuenta con las siguientes entidades:
 ## Operaciones de consulta de datos
 
  - Solicitar datos de un equipo de diagnóstico
-    - básicos
-    - con cursos
-    - con cursos activos
-    - todas las calificaciones
-    - calificaciones por periodo
+    - Marca
+    - Modelo
+    - Número Asignado
+    - Número de Serie
+
  - Solicitar datos de una licencia
-    - básico
-    - con historial de materias
-    - con materias activas materias
+    - Archivo de licencia
+    - Fecha de creación
 
  - Lista de equipos de diagnóstico
     - Todos
