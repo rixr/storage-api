@@ -1,25 +1,44 @@
 # Licenses Checker Query and Store
 
-Este proyecto almacena licencias en archivos `.dat` para la utilización del software de diagnóstico "Offboard Diagnostic Information System", y consulta la fecha de creación de la licencia y el número serial del equipo asignado a la licencia.
+Este proyecto almacena licencias con extension de archivo `.dat` para la utilización del software de diagnóstico "Offboard Diagnostic Information System", y consulta el archivo de licencia, la fecha de creación de la licencia, la marca, el modelo, el numero asignado al equipo de diagnóstico.
 
 Se cuenta con las siguientes entidades:
 - Equipo de diagnóstico (Marca, Modelo, Número Asignado, Número de Serie)
-- licencia (Nombre de licencia, fecha de creación)
+- licencia (Archivo de licencia, fecha de creación)
+
+
 
 ## Operacion para almacenamiento de datos.
 
 ### Operaciones de Equipo de diagnóstico
 - Registro de un equipo
-: Solicitamos la Marca, el Modelo, el Número Asignado y el Número de Serie del equipo, este ultimo es el identificador.
+: Solicitamos la Marca, el Modelo, el Número Asignado y el Número de Serie del equipo, este último es el identificador.
 
-- Actualización de número asignado de un equipo.
+- Actualización de número asignado de un equipo
 : Dar de baja un número Asignado.
 : Reasignar nuevo número de asignación.
 
-### Operaiones de Licencias
+### Operaicones de Licencias
 - Registro de una licencia
 : Solicitamos un archivo con extension `.dat` para asignarlo a un equipo de diagnóstico.
 
+
+
+## Operaciones de consulta de datos
+
+ - Solicitar datos de un equipo de diagnóstico
+    - básicos
+    - con cursos
+    - con cursos activos
+    - todas las calificaciones
+    - calificaciones por periodo
+ - Solicitar datos de una licencia
+    - básico
+    - con historial de materias
+    - con materias activas materias
+
+ - Lista de equipos de diagnóstico
+    - Todos
 
 Consiste en:
 
@@ -28,11 +47,11 @@ Consiste en:
 | Path                  | Descripción                                     |
 | --------------------- | ----------------------------------------------- |
 | /licenses/login       | Autenticación de usuarios                       |
-| /licenses/store       | Agrega un nuevo registro                        |
+| /licenses/store       | almacena un nuevo registro                      |
 | /licenses/info/<id>   | Muestra toda la información obtenida del equipo |
 
 
-# Archivos Relacionados
+## Archivos Relacionados
 
  - `routes/licenses-checker.py`
 
