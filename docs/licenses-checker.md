@@ -51,13 +51,16 @@ Se cuenta con las siguientes entidades:
 
 ## Procesos del API
 #### Login
+> Pendiente
 
 #### Registra nuevo equipo de diagnóstico
+> Pendiente
 
 #### Actualiza registro de equipo de diagnóstico
+> Pendiente
 
 #### informaciónormacion de los equipos de diagnóstico
-
+> Pendiente
 
 
 ## Archivos Relacionados
