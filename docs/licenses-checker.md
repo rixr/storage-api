@@ -1,6 +1,6 @@
-# Licenses Checker Query and Store
+# Licenses Checker Query and Store for ODIS
 
-Este proyecto almacena licencias con extension de archivo `.dat` para la utilización del software de diagnóstico "Offboard Diagnostic Information System", y consulta el archivo de licencia, la fecha de creación de la licencia, la marca, el modelo, el numero asignado al equipo de diagnóstico.
+Este proyecto **almacena licencias** con extension de archivo `.dat` para la utilización del software de diagnóstico para vehiculos llamado "Offboard Diagnostic Information System", se consulta diferentes elementos, el archivo de licencia, la fecha de creación de la licencia; de los equipos de diagnóstico se consulta la marca, el modelo y el numero asignado al equipo.
 
 Se cuenta con las siguientes entidades:
 - Equipo de diagnóstico (Marca, Modelo, Número Asignado, Número de Serie)
@@ -9,8 +9,7 @@ Se cuenta con las siguientes entidades:
 
 
 ## Operacion para almacenamiento de datos.
-
-### Operaciones de Equipo de diagnóstico
+#### Operaciones de Equipo de diagnóstico
 - Registro de un equipo
 : Solicitamos la Marca, el Modelo, el Número Asignado y el Número de Serie del equipo, este último es el identificador.
 
@@ -18,7 +17,7 @@ Se cuenta con las siguientes entidades:
 : Dar de baja un número Asignado.
 : Reasignar nuevo número de asignación.
 
-### Operaicones de Licencias
+#### Operaicones de Licencias
 - Registro de una licencia
 : Solicitamos un archivo con extension `.dat` para asignarlo a un equipo de diagnóstico.
 
@@ -39,15 +38,26 @@ Se cuenta con las siguientes entidades:
  - Lista de equipos de diagnóstico
     - Todos
 
-Consiste en:
+
 
 ## API
+| Path                  | Descripción                                         |
+| ----------------------| ----------------------------------------------------|
+| `/licenses/login`     | Pagina principal, autenticación de usuarios         |
+| `/licenses/new`       | Almacena nuevos registros de equipos de diagnóstico |
+| `/licenses/update`    | Actualiza registros                                 |
+| `/licenses/info`      | Muestra una lista de todos los equipos              |
+| `/licenses/info/<id>` | Muestra toda la información del equipo deseado      |
 
-| Path                  | Descripción                                     |
-| --------------------- | ----------------------------------------------- |
-| /licenses/login       | Autenticación de usuarios                       |
-| /licenses/store       | almacena un nuevo registro                      |
-| /licenses/info/<id>   | Muestra toda la información obtenida del equipo |
+## Procesos del API
+#### Login
+
+#### Registra nuevo equipo de diagnóstico
+
+#### Actualiza registro de equipo de diagnóstico
+
+#### informaciónormacion de los equipos de diagnóstico
+
 
 
 ## Archivos Relacionados
