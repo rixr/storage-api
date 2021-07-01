@@ -59,7 +59,7 @@ Se cuenta con las siguientes entidades:
 #### Actualiza registro de equipo de diagnóstico
 > Pendiente
 
-#### informaciónormacion de los equipos de diagnóstico
+#### Muestra información de los equipos de diagnóstico
 > Pendiente
 
 
