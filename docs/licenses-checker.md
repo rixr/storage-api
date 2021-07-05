@@ -1,4 +1,4 @@
-+ Licenses Checker Query and Store for ODIS
+# Licenses Checker Query and Store for ODIS
 Este proyecto **almacena licencias** con extensión de archivo `.dat` para la utilización del software de diagnóstico para vehículos llamado "Offboard Diagnostic Information System", se consulta diferentes elementos, el archivo de licencia, la fecha de creación de la licencia; de los equipos de diagnóstico se consulta la marca, el modelo y el numero asignado al equipo.
 
 ## Se cuenta con las siguientes entidades:
