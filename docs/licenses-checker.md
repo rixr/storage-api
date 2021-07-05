@@ -50,24 +50,31 @@ Este proyecto **almacena licencias** con extensión de archivo `.dat` para la ut
 > Pendiente
 
 ## Estructuras de solicitud y respuesta
-##### Registro de alumno
+##### Registro de equipo
 ```
 {
-    "nombre": "Juanito Johns",
-    "fecha_de_nacimiento": "1990-01-01"
+    "marca": "getac",
+    "modelo": "vas 6150e",
+    "numero_serie": "123467"
+    "licencia": {
+      "archivo": license.dat,
+      "fecha": "01-01-1997"
+    }
 }
 ```
 
-#### Respuesta de registro de alumno exitoso
-```
-{ "matricula": "XX-XX-XX-00" }
-```
-
-#### Mensaje de fallo
+##### Respuesta de registro de alumno exitoso
 ```
 {
-    "code": 500,
-    "message": "mensaje de error"
+  "codigo": 200,
+  "estatus": "registro exitoso"
+}
+```
+##### Mensaje de fallo
+```
+{
+    "codigo": 500,
+    "estatus": "registro fallido"
 }
 ```
 
