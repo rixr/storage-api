@@ -68,14 +68,14 @@ Este proyecto **almacena licencias** con extensión de archivo `.dat` para la ut
 {
   "codigo": 200,
   "estatus": "registro exitoso"
-}
+  }
 ```
 ##### Mensaje de fallo
 ```
 {
     "codigo": 500,
     "estatus": "registro fallido"
-}
+  }
 ```
 
 ## Archivos Relacionados
