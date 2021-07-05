@@ -63,7 +63,6 @@ Este proyecto **almacena licencias** con extensión de archivo `.dat` para la ut
 ##### Respuesta exitosa de registro de equipo
 ```
 {
-  "codigo": 200,
   "estatus": "registro exitoso"
   }
 ```
@@ -72,6 +71,28 @@ Este proyecto **almacena licencias** con extensión de archivo `.dat` para la ut
 {
     "codigo": 500,
     "estatus": "registro fallido"
+  }
+```
+
+### Registro de un archivo de licencia
+##### Respuesta exitosa de almacenamiento de archivo `.dat`
+```
+{
+  "estatus": "almacenamiento exitoso"
+  }
+```
+##### Mensaje de fallo de almacenamiento por tipo de archivo incorrecto
+```
+{
+    "codigo": 500,
+    "estatus": "almacenamiento fallido, tipo de archivo incorrecto"
+  }
+```
+##### Mensaje de fallo de almacenamiento por tamaño de archivo > 2MB
+```
+{
+    "codigo": 500,
+    "estatus": "almacenamiento fallido, tamaño de archivo excedente"
   }
 ```
 
