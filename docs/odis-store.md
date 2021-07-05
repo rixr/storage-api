@@ -8,11 +8,7 @@ Este proyecto **almacena licencias** con extensión de archivo `.dat` para la ut
 ## Operación para almacenamiento de datos.
 ##### Operaciones de Equipo de diagnóstico
 	- Registro de un equipo:
-		- Solicitamos la Marca, el Modelo y el Número de Serie del equipo, este último es el identificador.
-
 	- Actualización de un equipo.
-    - Dar de baja la licencia asignada
-    - Reasignar licencia nueva
 
 ##### Operaciones de Licencias
 	- Registro de una licencia:
@@ -41,16 +37,18 @@ Este proyecto **almacena licencias** con extensión de archivo `.dat` para la ut
 
 ## Procesos del API
 ##### Registra nuevo equipo de diagnóstico
-> Pendiente
+	- Solicitamos la Marca, el Modelo y el Número de Serie del equipo, este último es el identificador.
+	- Se solicita el archivo de la licencia que se asignara ademas de la fecha en la que se esya asignando.
 
 ##### Actualiza registro de equipo de diagnóstico
-> Pendiente
+	- Se da de baja la licencia asignada.
+	- Reasignar licencia nueva.
 
 ##### Muestra información de los equipos de diagnóstico
-> Pendiente
+	- En forma de lista  muestra todos los equipos con los que se cuentan, activos e inactivos.
 
 ## Estructuras de solicitud y respuesta
-##### Registro de equipo
+### Registro de un equipo
 ```
 {
     "marca": "getac",
@@ -62,15 +60,14 @@ Este proyecto **almacena licencias** con extensión de archivo `.dat` para la ut
     }
 }
 ```
-
-##### Respuesta de registro de alumno exitoso
+##### Respuesta exitosa de registro de equipo
 ```
 {
   "codigo": 200,
   "estatus": "registro exitoso"
   }
 ```
-##### Mensaje de fallo
+##### Mensaje de fallo de registro
 ```
 {
     "codigo": 500,
@@ -83,4 +80,4 @@ Este proyecto **almacena licencias** con extensión de archivo `.dat` para la ut
 ##### Prefijos de almacenamiento:
 > Pendiente o Nulo
 ##### Tablas de Base de Datos
-> Pendiente o Nulo
+> Pendiente
