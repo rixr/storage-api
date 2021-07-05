@@ -16,14 +16,14 @@ Este proyecto **almacena licencias** con extensión de archivo `.dat` para la ut
 
 ## Operaciones de consulta de datos
 ##### Solicitar datos de un equipo de diagnóstico
-  - Marca
-  - Modelo
-  - Número de Serie
+  	- Marca
+  	- Modelo
+  	- Número de Serie
 
 ##### Solicitar datos de una licencia
-  - Identificador de hardaware
-  - Archivo de licencia
-  - Fecha de creación
+  	- Identificador de hardware
+  	- Archivo de licencia
+  	- Fecha de creación
 
 
 ## API
@@ -38,7 +38,7 @@ Este proyecto **almacena licencias** con extensión de archivo `.dat` para la ut
 ## Procesos del API
 ##### Registra nuevo equipo de diagnóstico
 	- Solicitamos la Marca, el Modelo y el Número de Serie del equipo, este último es el identificador.
-	- Se solicita el archivo de la licencia que se asignara ademas de la fecha en la que se esya asignando.
+	- Se solicita el archivo de la licencia que se asignara, ademas de la fecha en la que se esta asignando.
 
 ##### Actualiza registro de equipo de diagnóstico
 	- Se da de baja la licencia asignada.
