@@ -24,7 +24,7 @@ else:
 
 app = bottle.Bottle()
 
-@app.get("/new")
+@app.post("/new")
 def store_record(*args, **kwargs):
     # data = bottle.request.json
     # filename = ""
@@ -32,23 +32,23 @@ def store_record(*args, **kwargs):
     return dict(code=200)
 
 
-@app.get("/update")
-def update_record(*args, **kwargs):
+@app.get("/list")
+def get_all_info(*args, **kwargs):
     # data = bottle.request.json
     # filename = ""
     # store_string("dell", filename, json_dumps(data))
     return dict(code=200)
 
 
-@app.get("/info")
-def all_info(*args, **kwargs):
+@app.get("/<serial_number>")
+def get_info_by_sn(*args, **kwargs):
     # data = bottle.request.json
     # filename = ""
     # store_string("dell", filename, json_dumps(data))
     return dict(code=200)
 
 
-@app.get("/info/<code>")
-def info_by_code(*args, code=None, **kwargs):
+@app.post("/<serial_number>")
+def update_record(*args, code=None, **kwargs):
     pass
     return dict(code=200)
