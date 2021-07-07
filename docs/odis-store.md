@@ -1,94 +1,79 @@
-# Licenses Checker Query and Store for ODIS
-Este proyecto **almacena licencias** con extensión de archivo `.dat` para la utilización del software de diagnóstico para vehículos llamado "Offboard Diagnostic Information System", se consulta diferentes elementos, el archivo de licencia, la fecha de creación de la licencia; de los equipos de diagnóstico se consulta la marca, el modelo y el numero asignado al equipo.
+# Descripcion general del proyecto `DONE`
+Este proyecto almacena licencias con extensión de archivo `.dat` para la utilización del software de diagnóstico para vehículos llamado "Offboard Diagnostic Information System", registra equipos de diagnóstico, actualiza los registros previos y muestra información especifica de cada uno de ellos, entre estos elementos te permite descargar su respectivo arrchivo de licencia.
 
-## Se cuenta con las siguientes entidades:
-	- Equipo de diagnóstico (Marca, Modelo, Número de Serie)
-	- Licencia (Archivo de licencia, fecha de creación)
+## Entrada del proyecto en la organizacion `DONE`
+Este proyecto ayuda en la operacion de la empresa Emporio Automotriz Volkswagen de Tijuana, facilitando el manejo de los recursos tecnologicos que utiliza el taller de servicio cuando se adquieren nuevos equipos de diagnostico.
 
-## Operación para almacenamiento de datos.
-##### Operaciones de Equipo de diagnóstico
-	- Registro de un equipo:
+## Modelado de datos `DONE`
+- Equipo de diagnóstico (Marca, Modelo, Número de Serie)
+- Licencia (Archivo de licencia, fecha de creación)
+
+## Interacciones de datos `DONE`
+### Equipo de diagnóstico
+	- Registro de un equipo.
 	- Actualización de un equipo.
-
-##### Operaciones de Licencias
-	- Registro de una licencia:
+### Licencias
+	- Registro de una licencia.
 		- Solicitamos un archivo con extension `.dat` para asignarlo a un equipo de diagnóstico.
 
-## Operaciones de consulta de datos
-##### Solicitar datos de un equipo de diagnóstico
-  	- Marca
-  	- Modelo
-  	- Número de Serie
+## Consultas de datos `DONE`
+- De un equipo de diagnóstico
+	- Muestra los campos basicos
+	- Licencia asignada
+- Lista de equipos de diagnóstico
+	- Muestra todos los equipos
+	- Tambien por numero de Serie
 
-##### Solicitar datos de una licencia
-  	- Identificador de hardware
-  	- Archivo de licencia
-  	- Fecha de creación
-
-
-## API
-| Método | Path               | Descripción                                         |
-| -------|--------------------|-----------------------------------------------------|
-| POST   | `/odis-store/new`  | Almacena nuevos registros de equipos de diagnóstico |
-| GET    | `/odis-store/list` | Muestra todos los registros                         |
-| GET    | `/odis-store/<id>` | Muestra toda la información del registro deseado    |
-| POST   | `/odis-store/<id>` | Actaliza la información del registro deseado        |
-
-
-## Procesos del API
-##### Registra nuevo equipo de diagnóstico
+## Operaciones de datos `DONE`
+### Registra nuevo equipo de diagnóstico
 	- Solicitamos la Marca, el Modelo y el Número de Serie del equipo, este último es el identificador.
 	- Se solicita el archivo de la licencia que se asignara, ademas de la fecha en la que se esta asignando.
 
-##### Actualiza registro de equipo de diagnóstico
+### Actualiza registro de equipo de diagnóstico
 	- Se da de baja la licencia asignada.
 	- Reasignar licencia nueva.
 
-##### Muestra información de los equipos de diagnóstico
+### Muestra información de los equipos de diagnóstico
 	- En forma de lista  muestra todos los equipos con los que se cuentan, activos e inactivos.
 
-## Estructuras de solicitud y respuesta
-### Registro de un equipo
+## Rutas HTTP `DONE`
+| Método | Path                          | Descripción                                         |
+| -------|-------------------------------|-----------------------------------------------------|
+| POST   | `/odis-store/new`             | Almacena nuevos registros de equipos de diagnóstico |
+| GET    | `/odis-store/list`            | Muestra todos los registros                         |
+| GET    | `/odis-store/<serial_number>` | Muestra toda la información del registro deseado    |
+| POST   | `/odis-store/<serial_number>` | Actaliza la información del registro deseado        |
+
+
+## Ejemplos de mensajes HTTP que aceptara y emitira el servidor `DONE`
+### registro de un nuevo equipo
 ```
 {
-    "marca": "getac",
-    "modelo": "vas 6150e",
-    "numero_serie": "123467"
-    "licencia": {
-      "archivo": license.dat,
-      "fecha": "01-01-1997"
+    "brand": "getac",
+    "model": "vas 6150e",
+    "serial_number": "123467"
+    "license": {
+      "file": license.dat,
+      "date": "01-01-1997"
     }
 }
 ```
-##### Respuesta exitosa de registro de equipo
+#### Respuesta exitosa de registro de equipo
 ```
 {
-  "estatus": "registro exitoso"
+	"code": 200,
+  "message": "registro exitoso",
+	"status": "active"
   }
 ```
-##### Mensaje de fallo de registro
-```
-{
-    "codigo": 500,
-    "estatus": "registro fallido"
-  }
-```
-
-### Registro de un archivo de licencia
-##### Respuesta exitosa de almacenamiento de archivo `.dat`
-```
-{
-  "estatus": "almacenamiento exitoso"
-  }
-```
-##### Mensaje de fallo de almacenamiento por tipo de archivo incorrecto
+#### Mensaje de fallo de almacenamiento por tipo de archivo incorrecto
 ```
 {
     "codigo": 500,
     "estatus": "almacenamiento fallido, tipo de archivo incorrecto"
   }
 ```
-##### Mensaje de fallo de almacenamiento por tamaño de archivo > 2MB
+#### Mensaje de fallo de almacenamiento por tamaño de archivo > 2MB
 ```
 {
     "codigo": 500,
@@ -96,9 +81,25 @@ Este proyecto **almacena licencias** con extensión de archivo `.dat` para la ut
   }
 ```
 
-## Archivos Relacionados
- - `routes/licenses-checker.py`
-##### Prefijos de almacenamiento:
-> Pendiente o Nulo
-##### Tablas de Base de Datos
-> Pendiente
+## Ejemplos de interacciones con el servidor
+```
+POST /odis-store/new
+```
+- Recibe una estructura de registro de equipo de diagnóstico.
+- 200, registrar una nuevo equipo, habilita un estado **Activo** y regresa un mensaje de éxito.
+- D.O.M, 500, regresa mensaje de fallo.
+```
+GET /odis-store/list
+```
+- 200, regresa una lista de todos los equipos de diagnóstico.
+- D.O.M, 500, regresa mensaje de fallo.
+```
+GET /odis-store/<serial_number>
+```
+- 200, regresa datos del equipo dado el numero de serie.
+- D.O.M, 500, regresa mensaje de fallo.
+```
+POST /odis-store/<serial_number>
+```
+- 201, actualizar información de un equipo dado el numero de serie.
+- D.O.M, 500, regresa mensaje de fallo.
