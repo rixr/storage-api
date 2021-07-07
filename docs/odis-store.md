@@ -55,8 +55,8 @@ Este proyecto ayuda en la operacion de la empresa Emporio Automotriz Volkswagen 
 	"license":{
 		"file": license.dat,
 	    "date": "01-01-1997"
-	  }
-}
+		}
+	}
 ```
 #### Respuesta exitosa de registro de equipo
 ```
