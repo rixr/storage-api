@@ -58,23 +58,21 @@ En el primer ejemplo se muestra un mensaje que acepta el servidor, en el segundo
 ### 1. registro de un nuevo equipo
 ```
 {
-	"brand": "getac",
-	"model": "vas 6150e",
-	"serial_number": "1324567",
-	"license":[
-			{
-				"file": 200,
-				"date": "registro exitoso"
-			  }
-		]
+    "brand": "getac",
+    "model": "vas 6150e",
+	"serial_number": "1234567",
+	"license": [{
+		"file": license.dat,
+		"date": "01-01-1970"
+		}]
   }
 ```
 ### 2. Respuesta exitosa de registro de equipo
 ```
 {
-	"code": 200,
-	"message": "registro exitoso",
-	"status": "active"
+    "code": 200,
+    "message": "registro exitoso",
+		"status": "active"
   }
 ```
 ### 3. Mensaje de fallo de almacenamiento por tipo de archivo incorrecto
@@ -97,7 +95,7 @@ En esta seccion se muestra un ejemplo de como recibe los datos el servidor, segu
 ```
 POST /odis-store/new
 
-curl -vq http://localhost:8080/odis-store/json \
+curl -vq http://localhost:8080/odis-store/new \
     -X POST \
     -H 'ORIGIN: http://localhost:1234' \
     -H 'Content-Type: application/json' \
@@ -106,18 +104,26 @@ curl -vq http://localhost:8080/odis-store/json \
 - Recibe una estructura de registro de equipo de diagnóstico.
 - 200, registrar una nuevo equipo, habilita un estado **Activo** y regresa un mensaje de éxito.
 - D.O.M, 500, regresa mensaje de fallo.
+
 ```
 GET /odis-store/list
 ```
 - 200, regresa una lista de todos los equipos de diagnóstico.
 - D.O.M, 500, regresa mensaje de fallo.
 ```
+
 GET /odis-store/<serial_number>
 ```
 - 200, regresa datos del equipo dado el numero de serie.
 - D.O.M, 500, regresa mensaje de fallo.
 ```
+
 POST /odis-store/<serial_number>
 ```
-- 201, actualizar información de un equipo dado el numero de serie.
+- 200, actualizar información de un equipo dado el numero de serie.
 - D.O.M, 500, regresa mensaje de fallo.
+
+## Autenticacion y autorizacion de usuarios
+Para este proyecto en especifico existiran dos usuarios, ambos con privilegios de administrador, por lo tanto tendran todos los permisos permitidos.
+- Leer, crear y editar todo.
+	- administrador: `(app:odis:read:all, app:odis:write:all)`
