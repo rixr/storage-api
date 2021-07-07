@@ -72,7 +72,7 @@ En el primer ejemplo se muestra un mensaje que acepta el servidor, en el segundo
 {
     "code": 200,
     "message": "registro exitoso",
-		"status": "active"
+	"status": "active"
   }
 ```
 ### 3. Mensaje de fallo de almacenamiento por tipo de archivo incorrecto
