@@ -1,14 +1,14 @@
-# Descripcion general del proyecto `DONE`
+# Descripcion general del proyecto
 Este proyecto almacena licencias con extensión de archivo `.dat` para la utilización del software de diagnóstico para vehículos llamado "Offboard Diagnostic Information System", registra equipos de diagnóstico, actualiza los registros previos y muestra información especifica de cada uno de ellos, entre estos elementos te permite descargar su respectivo arrchivo de licencia.
 
-## Entrada del proyecto en la organizacion `DONE`
+## Entrada del proyecto en la organizacion
 Este proyecto ayuda en la operacion de la empresa Emporio Automotriz Volkswagen de Tijuana, facilitando el manejo de los recursos tecnologicos que utiliza el taller de servicio cuando se adquieren nuevos equipos de diagnostico.
 
-## Modelado de datos `DONE`
+## Modelado de datos
 - Equipo de diagnóstico (Marca, Modelo, Número de Serie)
 - Licencia (Archivo de licencia, fecha de creación)
 
-## Interacciones de datos `DONE`
+## Interacciones de datos
 ### Equipo de diagnóstico
 	- Registro de un equipo.
 	- Actualización de un equipo.
@@ -16,15 +16,15 @@ Este proyecto ayuda en la operacion de la empresa Emporio Automotriz Volkswagen 
 	- Registro de una licencia.
 		- Solicitamos un archivo con extension `.dat` para asignarlo a un equipo de diagnóstico.
 
-## Consultas de datos `DONE`
-- De un equipo de diagnóstico
+## Consultas de datos
+- Consulta de un equipo de diagnóstico
 	- Muestra los campos basicos
 	- Licencia asignada
-- Lista de equipos de diagnóstico
+- Consulta lista de equipos de diagnóstico
 	- Muestra todos los equipos
 	- Tambien por numero de Serie
 
-## Operaciones de datos `DONE`
+## Operaciones de datos
 ### Registra nuevo equipo de diagnóstico
 	- Solicitamos la Marca, el Modelo y el Número de Serie del equipo, este último es el identificador.
 	- Se solicita el archivo de la licencia que se asignara, ademas de la fecha en la que se esta asignando.
@@ -36,7 +36,7 @@ Este proyecto ayuda en la operacion de la empresa Emporio Automotriz Volkswagen 
 ### Muestra información de los equipos de diagnóstico
 	- En forma de lista  muestra todos los equipos con los que se cuentan, activos e inactivos.
 
-## Rutas HTTP `DONE`
+## Rutas HTTP
 | Método | Path                          | Descripción                                         |
 | -------|-------------------------------|-----------------------------------------------------|
 | POST   | `/odis-store/new`             | Almacena nuevos registros de equipos de diagnóstico |
@@ -45,32 +45,25 @@ Este proyecto ayuda en la operacion de la empresa Emporio Automotriz Volkswagen 
 | POST   | `/odis-store/<serial_number>` | Actaliza la información del registro deseado        |
 
 
-## Ejemplos de mensajes HTTP que aceptara y emitira el servidor `DONE`
+## Ejemplos de mensajes HTTP que aceptara y emitira el servidor
 ### registro de un nuevo equipo
 ```
 {
 	"brand": "getac",
 	"model": "vas 6150e",
-	"serial_number": "123467",
-	"license": {
+	"serial_number": "123467"
+	"license":{
 		"file": license.dat,
-		"date": "01-01-1997"
-	}
+	    "date": "01-01-1997"
+	  }
 }
 ```
 #### Respuesta exitosa de registro de equipo
 ```
 {
 	"code": 200,
-  "message": "registro exitoso",
+	"message": "registro exitoso",
 	"status": "active"
-  }
-```
-#### Mensaje de fallo de almacenamiento por falta de entradas
-```
-{
-    "codigo": 500,
-    "estatus": "almacenamiento fallido, revisa tus datos"
   }
 ```
 #### Mensaje de fallo de almacenamiento por tipo de archivo incorrecto
@@ -93,7 +86,7 @@ Este proyecto ayuda en la operacion de la empresa Emporio Automotriz Volkswagen 
 POST /odis-store/new
 ```
 - Recibe una estructura de registro de equipo de diagnóstico.
-- 200, registrar una nuevo equipo, habilita un estado `Activo` y regresa un mensaje de éxito.
+- 200, registrar una nuevo equipo, habilita un estado **Activo** y regresa un mensaje de éxito.
 - D.O.M, 500, regresa mensaje de fallo.
 ```
 GET /odis-store/list
