@@ -49,13 +49,13 @@ Este proyecto ayuda en la operacion de la empresa Emporio Automotriz Volkswagen 
 ### registro de un nuevo equipo
 ```
 {
-    "brand": "getac",
-    "model": "vas 6150e",
-    "serial_number": "123467"
-    "license": {
-      "file": license.dat,
-      "date": "01-01-1997"
-    }
+	"brand": "getac",
+	"model": "vas 6150e",
+	"serial_number": "123467",
+	"license": {
+		"file": license.dat,
+		"date": "01-01-1997"
+	}
 }
 ```
 #### Respuesta exitosa de registro de equipo
@@ -64,6 +64,13 @@ Este proyecto ayuda en la operacion de la empresa Emporio Automotriz Volkswagen 
 	"code": 200,
   "message": "registro exitoso",
 	"status": "active"
+  }
+```
+#### Mensaje de fallo de almacenamiento por falta de entradas
+```
+{
+    "codigo": 500,
+    "estatus": "almacenamiento fallido, revisa tus datos"
   }
 ```
 #### Mensaje de fallo de almacenamiento por tipo de archivo incorrecto
@@ -86,7 +93,7 @@ Este proyecto ayuda en la operacion de la empresa Emporio Automotriz Volkswagen 
 POST /odis-store/new
 ```
 - Recibe una estructura de registro de equipo de diagnóstico.
-- 200, registrar una nuevo equipo, habilita un estado **Activo** y regresa un mensaje de éxito.
+- 200, registrar una nuevo equipo, habilita un estado `Activo` y regresa un mensaje de éxito.
 - D.O.M, 500, regresa mensaje de fallo.
 ```
 GET /odis-store/list
