@@ -1,3 +1,6 @@
+# License Manager for ODIS
+> Autor: Ricardo Ramos
+
 # Descripcion general del proyecto
 Este proyecto almacena licencias con extensión de archivo `.dat` para la utilización del software de diagnóstico para vehículos llamado "Offboard Diagnostic Information System", registra equipos de diagnóstico, actualiza los registros previos y muestra información especifica de cada uno de ellos, entre estos elementos te permite descargar su respectivo arrchivo de licencia.
 
@@ -5,38 +8,43 @@ Este proyecto almacena licencias con extensión de archivo `.dat` para la utiliz
 Este proyecto ayuda en la operacion de la empresa Emporio Automotriz Volkswagen de Tijuana, facilitando el manejo de los recursos tecnologicos que utiliza el taller de servicio cuando se adquieren nuevos equipos de diagnostico.
 
 ## Modelado de datos
+El proyecto cuenta con las siguientes entidades:
 - Equipo de diagnóstico (Marca, Modelo, Número de Serie)
 - Licencia (Archivo de licencia, fecha de creación)
 
 ## Interacciones de datos
+La manera en la que se relacionan nuestras entidades son de la siguiente manera:
 ### Equipo de diagnóstico
-	- Registro de un equipo.
-	- Actualización de un equipo.
+	- Permite registro de un equipo.
+	- Tambien la actualización a esos equipos.
 ### Licencias
-	- Registro de una licencia.
-		- Solicitamos un archivo con extension `.dat` para asignarlo a un equipo de diagnóstico.
+	- Cuando se hace un registro nuevo obligatoriamente se solicita de una licencia.
+		- Para ello solicitamos un archivo con formato `.dat` para asignarlo a un equipo de diagnóstico.
 
 ## Consultas de datos
+El presente proyecto puede hacer las siguientes consultas:
 - Consulta de un equipo de diagnóstico
-	- Muestra los campos basicos
-	- Licencia asignada
-- Consulta lista de equipos de diagnóstico
+	- Muestra los campos basicos del equipo
+	- Dentro se encuentra la licencia asignada
+- Lista de equipos de diagnóstico
 	- Muestra todos los equipos
-	- Tambien por numero de Serie
+	- Tambien en especifico por numero de Serie
 
 ## Operaciones de datos
+A continuacion se explica las diferentes maneras en las que se puede interactuar con el servidor:
 ### Registra nuevo equipo de diagnóstico
-	- Solicitamos la Marca, el Modelo y el Número de Serie del equipo, este último es el identificador.
-	- Se solicita el archivo de la licencia que se asignara, ademas de la fecha en la que se esta asignando.
+	- Para poder hacer un nuevo registro solicitamos la Marca, el Modelo y el Número de Serie del equipo, este último es el identificador.
+	- En el registo se solicita el archivo de la licencia que se asignara, ademas de la fecha en la que se esta asignando.
 
 ### Actualiza registro de equipo de diagnóstico
-	- Se da de baja la licencia asignada.
-	- Reasignar licencia nueva.
+	- Para lograr la Actualización primero se da de baja la licencia asignada.
+	- Seguido se debe reasignar una licencia nueva.
 
 ### Muestra información de los equipos de diagnóstico
 	- En forma de lista  muestra todos los equipos con los que se cuentan, activos e inactivos.
 
 ## Rutas HTTP
+En la siguiente tabla se especifica cuales son las rutas con las que cuenta este proyecto, ademas del metodo HTTP que se utiliza, la ruta como tal y una breve descripcion de su funcion.
 | Método | Path                          | Descripción                                         |
 | -------|-------------------------------|-----------------------------------------------------|
 | POST   | `/odis-store/new`             | Almacena nuevos registros de equipos de diagnóstico |
@@ -46,19 +54,22 @@ Este proyecto ayuda en la operacion de la empresa Emporio Automotriz Volkswagen 
 
 
 ## Ejemplos de mensajes HTTP que aceptara y emitira el servidor
-### registro de un nuevo equipo
+En el primer ejemplo se muestra un mensaje que acepta el servidor, en el segundo ejemplo, si todo fue correctamente completado nos regresa un mensaje de exito, a partir del tercer ejemplo son casos diferentes de error que emite el servidor cuando se interactua con el de manera no planeada.
+### 1. registro de un nuevo equipo
 ```
 {
 	"brand": "getac",
 	"model": "vas 6150e",
-	"serial_number": "123467"
-	"license":{
-		"file": license.dat,
-	    "date": "01-01-1997"
-		}
-	}
+	"serial_number": "1324567",
+	"license":[
+			{
+				"file": 200,
+				"date": "registro exitoso"
+			  }
+		]
+  }
 ```
-#### Respuesta exitosa de registro de equipo
+### 2. Respuesta exitosa de registro de equipo
 ```
 {
 	"code": 200,
@@ -66,24 +77,31 @@ Este proyecto ayuda en la operacion de la empresa Emporio Automotriz Volkswagen 
 	"status": "active"
   }
 ```
-#### Mensaje de fallo de almacenamiento por tipo de archivo incorrecto
+### 3. Mensaje de fallo de almacenamiento por tipo de archivo incorrecto
 ```
 {
-    "codigo": 500,
-    "estatus": "almacenamiento fallido, tipo de archivo incorrecto"
+    "code": 500,
+    "message": "almacenamiento fallido, formato de archivo incorrecto"
   }
 ```
-#### Mensaje de fallo de almacenamiento por tamaño de archivo > 2MB
+### 4. Mensaje de fallo de almacenamiento por tamaño de archivo > 2MB
 ```
 {
-    "codigo": 500,
-    "estatus": "almacenamiento fallido, tamaño de archivo excedente"
+    "code": 500,
+    "message": "almacenamiento fallido, tamaño de archivo excedente"
   }
 ```
 
 ## Ejemplos de interacciones con el servidor
+En esta seccion se muestra un ejemplo de como recibe los datos el servidor, seguido de una explicacion de los que sucede despues.
 ```
 POST /odis-store/new
+
+curl -vq http://localhost:8080/odis-store/json \
+    -X POST \
+    -H 'ORIGIN: http://localhost:1234' \
+    -H 'Content-Type: application/json' \
+    --data '{ "brand": "getac", "model": "vas 6150e", "serial_number": "1324567", "license":[{"file": license.dat, "date": "01/01/1970" } ] }'
 ```
 - Recibe una estructura de registro de equipo de diagnóstico.
 - 200, registrar una nuevo equipo, habilita un estado **Activo** y regresa un mensaje de éxito.
