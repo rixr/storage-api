@@ -1,8 +1,10 @@
 # License Manager for ODIS
-> Autor: Ricardo Ramos
+> Autor: ***Ricardo Ramos***
+
+<br>
 
 # Descripcion general del proyecto
-Este proyecto almacena licencias con extensión de archivo `.dat` para la utilización del software de diagnóstico para vehículos llamado "Offboard Diagnostic Information System", registra equipos de diagnóstico, actualiza los registros previos y muestra información especifica de cada uno de ellos, entre estos elementos te permite descargar su respectivo arrchivo de licencia.
+Este proyecto almacena licencias con extensión de archivo `.dat` para la utilización del software de diagnóstico para vehículos llamado "Offboard Diagnostic Information System", registra equipos de diagnóstico, actualiza los registros previos y muestra información especifica de cada uno de ellos, entre estos elementos te permite descargar su respectivo archivo de licencia.
 
 <br>
 
@@ -191,7 +193,7 @@ El metodo optimo para este proyecto es almacenamiento de archivos locales.
 <br>
 
 ## Plan para la codificacion de los modulos
-Para la codificacion de los moduos del proyecto primero se revisan los requerimieentos, seguido se construyen las rutas o funciones que se lleguen a necesitar, a medida que se avanza se necesitaran modulos especificos los cualles se tendran que construir, al momento no pudo especificar mas.
+Para la codificacion de los moduos del proyecto primero se revisan los requerimieentos, seguido se construyen las rutas o funciones que se lleguen a necesitar, a medida que se avanza se necesitaran modulos especificos los cuales se tendran que construir, al momento se cuentan con lo mas basicos.
 
 <br>
 
@@ -236,7 +238,7 @@ Estas pruebas se realizaran almacenando nuevos registros, algunos de ellos con d
 
  | Concepto                                            | Commit Hash                               |
  | --------------------------------------------------- | ----------------------------------------- |
- | Creacion de rutas dentro de `/routes/odis-store.py` | e8294bf9153d9f6269a9a99a5f200ede7d6cb68d  |
+ | Creación de rutas dentro de `/routes/odis-store.py` | e8294bf9153d9f6269a9a99a5f200ede7d6cb68d  |
 
 <br>
 
