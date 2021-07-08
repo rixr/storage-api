@@ -33,7 +33,7 @@ El presente proyecto puede hacer las siguientes consultas:
 ## Operaciones de datos
 A continuacion se explica las diferentes maneras en las que se puede interactuar con el servidor:
 ### Registra nuevo equipo de diagnóstico
-	- Para poder hacer un nuevo registro solicitamos la Marca, el Modelo y el Número de Serie del equipo, este último es el identificador.
+	- Para hacer un nuevo registro solicitamos la Marca, el Modelo y el Número de Serie del equipo, este último es el identificador.
 	- En el registo se solicita el archivo de la licencia que se asignara, ademas de la fecha en la que se esta asignando.
 
 ### Actualiza registro de equipo de diagnóstico
@@ -127,3 +127,14 @@ POST /odis-store/<serial_number>
 Para este proyecto en especifico existiran dos usuarios, ambos con privilegios de administrador, por lo tanto tendran todos los permisos permitidos.
 - Leer, crear y editar todo.
 	- administrador: `(app:odis:read:all, app:odis:write:all)`
+
+# Plan de Implementacion (Aspecto General)
+Este proyecto resuelve la falta de manejo de las licencias con las que la organizacion cuenta para la utilizacion de sus equipos de diagnostico para vehiculos. Dentro de estos equipos se instala un software que obligatoriamente solicita un archivo de licencia.
+
+Una de las motivaciones para la realizacion de este proyecto es ofrecer una herramienta a la organizacion que le ayude a tener un manejo de estos recursos tecnologicos ya que nunca antes se habia tenido esta posibilidad y que cubre la necesidad de tomar el control dado la regularidad con la que se presentan estas situaciones.
+
+Las personas que notaran el impacto que puede tener este proyecto son las involucradas en los departamentos de Sistemas y del taller de Servicio, que son los que diariamente trabajan con estos equipos de diagnostico.
+
+Los recursos necesarios para iniciar a trabajar con este proyecto son basicos, como recurso humano estan los administradores, quienes llevaran el manejo de la aplicacion, los recursos de computo necesarios son una computadora, de preferencia portatil y la infraestructura necesaria un pequeño servidor privado para trabajar de manera local.
+
+Al desplegar este proyecto se espera que la empresa beneficiada continue dandole uso y actualizando la aplicacion de manera que se tenga el control de licencias que se busca durante un largo tiempo.
