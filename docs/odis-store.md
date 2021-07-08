@@ -154,6 +154,8 @@ curl -vq http://localhost:8080/odis-store/1234567 \
 - 200, actualizar información de un equipo dado el número de serie.
 - D.O.M, 500, regresa mensaje de fallo.
 
+<br>
+
 ## Autenticacion y autorizacion de usuarios
 Para este proyecto en especifico existiran dos usuarios, ambos con privilegios de administrador, por lo tanto tendran todos los permisos permitidos.
 - Leer, crear y editar todo.
@@ -216,6 +218,8 @@ Estas pruebas se realizaran almacenando nuevos registros, algunos de ellos con d
 | ------------------------------ | ----------------------------------------- |
 | Creacion de Fork del proyecto  | 828c4fe16e7ca2dd34fc983c698bffeed8be0980  |
 
+<br>
+
 2. Crear los archivos correspondientes a su proyecto, y someterlos a control de versiones.  **Señalar el commit-hash que contiene la creación de dichos archivos.**
 
 | Concepto                                      | Commit Hash                               |
@@ -225,6 +229,8 @@ Estas pruebas se realizaran almacenando nuevos registros, algunos de ellos con d
 | Creacion del archivo `/modules/odis-store.py` | de564db1b86ab52787ce7ecf5382d34af0a2a633  |
 | Creacion del archivo `/models/odis-store.py`  | ed17aa264fbaf14a02c94c7cad015f99c957d905  |
 
+<br>
+
 3. Crear todas las rutas especificadas en su archivo de documentación dentro de su archivo en la carpeta routes, y todas deben de responder 501, con `Content-Type: application/json`, y un cuerpo de respuesta en formato json con 2 llaves, code y message, el message debe contener el mensaje, `Not Implemented`.
  **Señalar el commit-hash que contiene la codificacion de las rutas.**
 
@@ -232,12 +238,16 @@ Estas pruebas se realizaran almacenando nuevos registros, algunos de ellos con d
  | --------------------------------------------------- | ----------------------------------------- |
  | Creacion de rutas dentro de `/routes/odis-store.py` | e8294bf9153d9f6269a9a99a5f200ede7d6cb68d  |
 
+<br>
+
 4. Crear en su carpeta de modulos funciones que emulen las interacciones con el almacén de archivos o datos, es decir que si necesitas una función de consulta, crear una función que retorne una consulta simulada con datos codificados como constantes, y si necesitas crear objetos funciones que retornen simulando una creación exitosa.
 **Señalar el commit-hash que contiene la codificacion de estas funciones asistentes.**
 
 | Concepto                  | Commit Hash                               |
 | ------------------------- | ----------------------------------------- |
 | Codificación de funciones | daefabf5db345e913b9729b719660a2e0f797562  |
+
+<br>
 
 5. Crear mock ups, de las vistas que desean implementar, utilizando MoqUps (conectar a su google drive).
 – Una vez concluidas las propuestas de vistas exportar a imagen, e incluir en el documento una explicacion de los datos expresados en las vistas emparejandolos con que endpoints contienen dicha informacion o a cual endpoint de su proyecto, estos activan.
