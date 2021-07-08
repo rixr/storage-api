@@ -196,7 +196,7 @@ Estas pruebas se realizaran almacenando nuevos registros, algunos de ellos con d
 | Creacion del archivo `/modules/odis-store.py` | de564db1b86ab52787ce7ecf5382d34af0a2a633  |
 | Creacion del archivo `/models/odis-store.py`  | ed17aa264fbaf14a02c94c7cad015f99c957d905  |
 
-3. Crear todas las rutas especificadas en su archivo de documentación dentro de su archivo en la carpeta routes, y todas deben de responder 501, con Content-Type: application/json, y un cuerpo de respuesta en formato json con 2 llaves, code y message, el message debe contener el mensaje, Not Implemented.
+3. Crear todas las rutas especificadas en su archivo de documentación dentro de su archivo en la carpeta routes, y todas deben de responder 501, con `Content-Type: application/json`, y un cuerpo de respuesta en formato json con 2 llaves, code y message, el message debe contener el mensaje, `Not Implemented`.
  **Señalar el commit-hash que contiene la codificacion de las rutas.**
 
  | Concepto                                            | Commit Hash                               |
@@ -212,9 +212,14 @@ Estas pruebas se realizaran almacenando nuevos registros, algunos de ellos con d
 
 5. Crear mock ups, de las vistas que desean implementar, utilizando MoqUps (conectar a su google drive).
 – Una vez concluidas las propuestas de vistas exportar a imagen, e incluir en el documento una explicacion de los datos expresados en las vistas emparejandolos con que endpoints contienen dicha informacion o a cual endpoint de su proyecto, estos activan.
-– Las imagenes deberan ser nombradas como ./docs/assets/--.png
+– Las imagenes deberan ser nombradas como `./docs/assets/--.png`
 **Señalar el commit-hash que contiene la inclusión de estas descripciones al documento, junto con los commits que contienen las imagenes.**
 
-| Concepto             | Commit Hash                               |
-| -------------------- | ----------------------------------------- |
-| Inclusión de mockups | d37838c05276e244d79a4364ab49dd8ed6f0ece2  |
+| Concepto               | Commit Hash                               |
+| ---------------------- | ----------------------------------------- |
+| Inclusión de mockups   | d37838c05276e244d79a4364ab49dd8ed6f0ece2  |
+
+## Descripción de mockups.
+El mockup `docs/assets/odis-store_0001_new-visualization` muestra la vista previa de nuevos registros de equipos de diagnóstico, se solicita a traves de campos de entradas los datos necesarios para un almacenamiento exitos, se solictan los siguuientes datos, la marca del equipo, el modelo de este, su número de serie, seleccionar un archivo local que debe tener un formato estricto `.dat` y con un tamaño menor a 2MB, de otro modo no se aceptara el archivo, finalmete seleccionar la fecha en la que se esta guardando ese archivo de licencia. El botón `Registrar` ejecuta la funcion de almacenamiento.
+
+En el siguiente mockup `docs/assets/odis-store_0002_list-visualization` se observa una taba que contiene todos los equipos registrados con anterioridad, su respectiva licencia asignada, esta licencia puede ser descargada dandole un click, finalmete hay un boton para editar el registro deseado; este botón nos redirige hacia otra ventana, a la ventana de `docs/assets/odis-store_0003_update-visualization`, aca se muestran los datos basicos del equipo seleccionado, pero los campos de `Licencia` y `Fecha` son modificables, ya que de es parte de esta ventana, ademas de ver los datos individuales del equipo puedes actualizar esa misma información. Para cambiar un archivo de licencia debes de buscarla en tu equipo, seleccionarlo y notaras que se reemplaza el archivo, despues debes de cambiar el campo de fecha, una vez realizado el proceso el botón de `Actualizar` ejecuta una funcion que hace los cambios y los guarda.
