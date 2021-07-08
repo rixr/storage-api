@@ -99,7 +99,9 @@ curl -vq http://localhost:8080/odis-store/new \
     -X POST \
     -H 'ORIGIN: http://localhost:1234' \
     -H 'Content-Type: application/json' \
-    --data '{ "brand": "getac", "model": "vas 6150e", "serial_number": "1324567", "license":[{"file": license.dat, "date": "01/01/1970" } ] }'
+    --data '{ "brand": "getac", "model": "vas 6150e",
+		"serial_number": "1324567",
+		"license":[{"file": license.dat, "date": "01/01/1970" } ] }'
 ```
 - Recibe una estructura de registro de equipo de diagnóstico.
 - 200, registrar una nuevo equipo, habilita un estado **Activo** y regresa un mensaje de éxito.
@@ -107,18 +109,35 @@ curl -vq http://localhost:8080/odis-store/new \
 
 ```
 GET /odis-store/list
+
+curl -vq http://localhost:8080/odis-store/list \
+    -X GET \
+    -H 'Content-Type: application/json' \
+		-- data '{"serial_number"}'
 ```
 - 200, regresa una lista de todos los equipos de diagnóstico.
 - D.O.M, 500, regresa mensaje de fallo.
-```
 
+```
 GET /odis-store/<serial_number>
+
+curl -vq http://localhost:8080/odis-store/1234567 \
+    -X GET \
+    -H 'Content-Type: application/json' \
+		-- data '{"brand", "model", "serial_number", "license"}'
 ```
 - 200, regresa datos del equipo dado el numero de serie.
 - D.O.M, 500, regresa mensaje de fallo.
-```
 
+```
 POST /odis-store/<serial_number>
+
+curl -vq http://localhost:8080/odis-store/1234567 \
+    -X POST \
+    -H 'Content-Type: application/json' \
+		-- data '{"brand":"foo", "model":"foo",
+		"serial_number":"1234567",
+		"license":[{"file": license2.dat, "date": "02/02/1970" } ]}'
 ```
 - 200, actualizar información de un equipo dado el numero de serie.
 - D.O.M, 500, regresa mensaje de fallo.
@@ -148,9 +167,10 @@ Al desplegar este proyecto se espera que la empresa beneficiada continue dandole
 El metodo optimo para este proyecto es almacenamiento de archivos locales.
 
 ## Plan para la codificacion de los modulos
-
+Para la codificacion de los moduos del proyecto primero se revisan los requerimieentos, seguido se construyen las rutas o funciones que se lleguen a necesitar, a medida que se avanza se necesitaran modulos especificos los cualles se tendran que construir, al momento no pudo especificar mas.
 
 ## Plan para la verificacion de la calidad del producto (pruebas manuales de los casos de uso, pruebas automatizadas del caso de uso)
+Estas pruebas se realizaran almacenando nuevos registros, algunos de ellos con diferentes entradas erroneas para ver que es lo que se necesita reparar, por ejemplo, la validacion de formatos de archivos que se podran recibir, los formatos de fecha, el tamaño maximo de los archivos de licencia, entre otros casos que se realizaran para probar la funcionalidad y calidad del proyecto. 
 
 ## Plan para el despliegue del proyecto de codigo. `OPCIONAL +++`
 ## Plan para realizar reportes de opercion y estatus actual del programa. `OPCIONAL +++`
