@@ -176,8 +176,8 @@ Para la codificacion de los moduos del proyecto primero se revisan los requerimi
 ## Plan para la verificacion de la calidad del producto (pruebas manuales de los casos de uso, pruebas automatizadas del caso de uso)
 Estas pruebas se realizaran almacenando nuevos registros, algunos de ellos con diferentes entradas erroneas para ver que es lo que se necesita reparar, por ejemplo, la validacion de formatos de archivos que se podran recibir, los formatos de fecha, el tamaño maximo de los archivos de licencia, entre otros casos que se realizaran para probar la funcionalidad y calidad del proyecto.
 
-## Plan para el despliegue del proyecto de codigo. `OPCIONAL +++`
-## Plan para realizar reportes de opercion y estatus actual del programa. `OPCIONAL +++`
+## Plan para el despliegue del proyecto de codigo. `+++`
+## Plan para realizar reportes de opercion y estatus actual del programa. `+++`
 
 # Evaluacion - Computo en la nube
 1. Crear un fork del proyecto storage-api
@@ -206,9 +206,9 @@ Estas pruebas se realizaran almacenando nuevos registros, algunos de ellos con d
 4. Crear en su carpeta de modulos funciones que emulen las interacciones con el almacén de archivos o datos, es decir que si necesitas una función de consulta, crear una función que retorne una consulta simulada con datos codificados como constantes, y si necesitas crear objetos funciones que retornen simulando una creación exitosa.
 **Señalar el commit-hash que contiene la codificacion de estas funciones asistentes.**
 
-| Concepto                                            | Commit Hash                               |
-| --------------------------------------------------- | ----------------------------------------- |
-| Lorem Ipsum` | Lorem Ipsum  |
+| Concepto                  | Commit Hash                               |
+| ------------------------- | ----------------------------------------- |
+| Codificación de funciones | daefabf5db345e913b9729b719660a2e0f797562  |
 
 5. Crear mock ups, de las vistas que desean implementar, utilizando MoqUps (conectar a su google drive).
 – Una vez concluidas las propuestas de vistas exportar a imagen, e incluir en el documento una explicacion de los datos expresados en las vistas emparejandolos con que endpoints contienen dicha informacion o a cual endpoint de su proyecto, estos activan.
