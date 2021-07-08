@@ -58,21 +58,20 @@ En el primer ejemplo se muestra un mensaje que acepta el servidor, en el segundo
 ### 1. registro de un nuevo equipo
 ```
 {
-    "brand": "getac",
-    "model": "vas 6150e",
-	"serial_number": "1234567",
-	"license": [{
-		"file": license.dat,
-		"date": "01-01-1970"
-		}]
-  }
+  "brand": "getac",
+  "model": "vas 6150e",
+  "serial_number" : "1234567",
+  "license" : [{
+      "file" : license.dat,
+      "date" : "01-01-1970"
+    }]
+}
 ```
 ### 2. Respuesta exitosa de registro de equipo
 ```
 {
     "code": 200,
-    "message": "registro exitoso",
-	"status": "active"
+    "message": "registro exitoso"
   }
 ```
 ### 3. Mensaje de fallo de almacenamiento por tipo de archivo incorrecto
@@ -96,41 +95,35 @@ En esta seccion se muestra un ejemplo de como recibe los datos el servidor, segu
 POST /odis-store/new
 ```
 ```
-curl -vq http://localhost:8080/odis-store/new \
-    -X POST \
-    -H 'ORIGIN: http://localhost:1234' \
-    -H 'Content-Type: application/json' \
-    --data '{ "brand": "getac", "model": "vas 6150e",
-		"serial_number": "1324567",
-		"license":[{"file": license.dat, "date": "01/01/1970" } ] }'
+curl -vq http://localhost:8080/odis-store/new -X POST -H 'ORIGIN: http://localhost:1234' -H 'Content-Type: application/json' --data '{ "brand": "getac", "model": "vas 6150e", "serial_number": "1324567", "license":[{"file": license.dat, "date": "01/01/1970" }]}'
 ```
 - Recibe una estructura de registro de equipo de diagnóstico.
 - 200, registrar una nuevo equipo, habilita un estado **Activo** y regresa un mensaje de éxito.
 - D.O.M, 500, regresa mensaje de fallo.
 
+##
+
 ```
 GET /odis-store/list
 ```
 ```
-curl -vq http://localhost:8080/odis-store/list \
-    -X GET \
-    -H 'Content-Type: application/json' \
-		-- data '{"serial_number"}'
+curl -vq http://localhost:8080/odis-store/list -X GET -H 'Content-Type: application/json' -- data '{"serial_number"}'
 ```
 - 200, regresa una lista de todos los equipos de diagnóstico.
 - D.O.M, 500, regresa mensaje de fallo.
+
+##
 
 ```
 GET /odis-store/<serial_number>
 ```
 ```
-curl -vq http://localhost:8080/odis-store/1234567 \
-    -X GET \
-    -H 'Content-Type: application/json' \
-		-- data '{"brand", "model", "serial_number", "license"}'
+curl -vq http://localhost:8080/odis-store/1234567 -X GET -H 'Content-Type: application/json' -- data '{"brand", "model", "serial_number", "license"}'
 ```
 - 200, regresa datos del equipo dado el número de serie.
 - D.O.M, 500, regresa mensaje de fallo.
+
+##
 
 ```
 POST /odis-store/<serial_number>
@@ -138,10 +131,7 @@ POST /odis-store/<serial_number>
 ```
 curl -vq http://localhost:8080/odis-store/1234567 \
     -X POST \
-    -H 'Content-Type: application/json' \
-		-- data '{"brand":"foo", "model":"foo",
-		"serial_number":"1234567",
-		"license":[{"file": license2.dat, "date": "02/02/1970" } ]}'
+    -H 'Content-Type: application/json' -- data '{"brand":"foo", "model":"foo", "serial_number":"1234567", "license":[{"file": license2.dat, "date": "02/02/1970" } ]}'
 ```
 - 200, actualizar información de un equipo dado el número de serie.
 - D.O.M, 500, regresa mensaje de fallo.
@@ -150,6 +140,8 @@ curl -vq http://localhost:8080/odis-store/1234567 \
 Para este proyecto en especifico existiran dos usuarios, ambos con privilegios de administrador, por lo tanto tendran todos los permisos permitidos.
 - Leer, crear y editar todo.
 	- administrador: `(app:odis:read:all, app:odis:write:all)`
+
+##
 
 # Plan de Implementacion (Aspecto General)
 Este proyecto resuelve la falta de manejo de las licencias con las que la organizacion cuenta para la utilizacion de sus equipos de diagnóstico para vehiculos. Dentro de estos equipos se instala un software que obligatoriamente solicita un archivo de licencia.
@@ -161,6 +153,8 @@ Las personas que notaran el impacto que puede tener este proyecto son las involu
 Los recursos necesarios para iniciar a trabajar con este proyecto son basicos, como recurso humano estan los administradores, quienes llevaran el manejo de la aplicacion/herramienta, los recursos de computo necesarios son una computadora, de preferencia portatil y la infraestructura necesaria un pequeño servidor privado para trabajar de manera local.
 
 Al desplegar este proyecto se espera que la empresa beneficiada continue dandole uso y actualizando la aplicacion de manera que se tenga el control de licencias que se busca durante un largo tiempo.
+
+##
 
 # Plan de Implementacion (Aspecto Tecnico)
 ## Modulos de codigo necesarios
@@ -178,6 +172,9 @@ Estas pruebas se realizaran almacenando nuevos registros, algunos de ellos con d
 
 ## Plan para el despliegue del proyecto de codigo. `+++`
 ## Plan para realizar reportes de opercion y estatus actual del programa. `+++`
+
+##
+##
 
 # Evaluacion - Computo en la nube
 1. Crear un fork del proyecto storage-api
