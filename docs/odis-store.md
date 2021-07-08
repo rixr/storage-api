@@ -4,13 +4,19 @@
 # Descripcion general del proyecto
 Este proyecto almacena licencias con extensión de archivo `.dat` para la utilización del software de diagnóstico para vehículos llamado "Offboard Diagnostic Information System", registra equipos de diagnóstico, actualiza los registros previos y muestra información especifica de cada uno de ellos, entre estos elementos te permite descargar su respectivo arrchivo de licencia.
 
+<br>
+
 ## Entrada del proyecto en la organizacion
 Este proyecto ayuda en la operacion de la empresa Emporio Automotriz Volkswagen de Tijuana, facilitando el manejo de los recursos tecnologicos que utiliza el taller de servicio cuando se adquieren nuevos equipos de diagnóstico.
+
+<br>
 
 ## Modelado de datos
 El proyecto cuenta con las siguientes entidades:
 - Equipo de diagnóstico (Marca, Modelo, Número de Serie)
 - Licencia (Archivo de licencia, fecha de creación)
+
+<br>
 
 ## Interacciones de datos
 La manera en la que se relacionan nuestras entidades son de la siguiente manera:
@@ -21,6 +27,8 @@ La manera en la que se relacionan nuestras entidades son de la siguiente manera:
 	- Cuando se hace un registro nuevo obligatoriamente se solicita de una licencia.
 		- Para ello solicitamos un archivo con formato `.dat` para asignarlo a un equipo de diagnóstico.
 
+<br>
+
 ## Consultas de datos
 El presente proyecto puede hacer las siguientes consultas:
 - Consulta de un equipo de diagnóstico
@@ -29,6 +37,8 @@ El presente proyecto puede hacer las siguientes consultas:
 - Lista de equipos de diagnóstico
 	- Muestra todos los equipos
 	- Tambien en especifico por número de Serie
+
+<br>
 
 ## Operaciones de datos
 A continuacion se explica las diferentes maneras en las que se puede interactuar con el servidor:
@@ -43,6 +53,8 @@ A continuacion se explica las diferentes maneras en las que se puede interactuar
 ### Muestra información de los equipos de diagnóstico
 	- En forma de lista  muestra todos los equipos con los que se cuentan, activos e inactivos.
 
+<br>
+
 ## Rutas HTTP
 En la siguiente tabla se especifica cuales son las rutas con las que cuenta este proyecto, ademas del metodo HTTP que se utiliza, la ruta como tal y una breve descripcion de su funcion.
 | Método | Path                          | Descripción                                         |
@@ -52,6 +64,7 @@ En la siguiente tabla se especifica cuales son las rutas con las que cuenta este
 | GET    | `/odis-store/<serial_number>` | Muestra toda la información del registro deseado    |
 | POST   | `/odis-store/<serial_number>` | Actaliza la información del registro deseado        |
 
+<br>
 
 ## Ejemplos de mensajes HTTP que aceptara y emitira el servidor
 En el primer ejemplo se muestra un mensaje que acepta el servidor, en el segundo ejemplo, si todo fue correctamente completado nos regresa un mensaje de exito, a partir del tercer ejemplo son casos diferentes de error que emite el servidor cuando se interactua con el de manera no planeada.
@@ -67,6 +80,7 @@ En el primer ejemplo se muestra un mensaje que acepta el servidor, en el segundo
     }]
 }
 ```
+
 ### 2. Respuesta exitosa de registro de equipo
 ```
 {
@@ -74,6 +88,7 @@ En el primer ejemplo se muestra un mensaje que acepta el servidor, en el segundo
     "message": "registro exitoso"
   }
 ```
+
 ### 3. Mensaje de fallo de almacenamiento por tipo de archivo incorrecto
 ```
 {
@@ -81,6 +96,7 @@ En el primer ejemplo se muestra un mensaje que acepta el servidor, en el segundo
     "message": "almacenamiento fallido, formato de archivo incorrecto"
   }
 ```
+
 ### 4. Mensaje de fallo de almacenamiento por tamaño de archivo > 2MB
 ```
 {
@@ -88,6 +104,8 @@ En el primer ejemplo se muestra un mensaje que acepta el servidor, en el segundo
     "message": "almacenamiento fallido, tamaño de archivo excedente"
   }
 ```
+
+<br>
 
 ## Ejemplos de interacciones con el servidor
 En esta seccion se muestra un ejemplo de como recibe los datos el servidor, seguido de una explicacion de los que sucede despues.
@@ -101,7 +119,7 @@ curl -vq http://localhost:8080/odis-store/new -X POST -H 'ORIGIN: http://localho
 - 200, registrar una nuevo equipo, habilita un estado **Activo** y regresa un mensaje de éxito.
 - D.O.M, 500, regresa mensaje de fallo.
 
-##
+<br>
 
 ```
 GET /odis-store/list
@@ -112,7 +130,7 @@ curl -vq http://localhost:8080/odis-store/list -X GET -H 'Content-Type: applicat
 - 200, regresa una lista de todos los equipos de diagnóstico.
 - D.O.M, 500, regresa mensaje de fallo.
 
-##
+<br>
 
 ```
 GET /odis-store/<serial_number>
@@ -123,7 +141,7 @@ curl -vq http://localhost:8080/odis-store/1234567 -X GET -H 'Content-Type: appli
 - 200, regresa datos del equipo dado el número de serie.
 - D.O.M, 500, regresa mensaje de fallo.
 
-##
+<br>
 
 ```
 POST /odis-store/<serial_number>
@@ -141,7 +159,8 @@ Para este proyecto en especifico existiran dos usuarios, ambos con privilegios d
 - Leer, crear y editar todo.
 	- administrador: `(app:odis:read:all, app:odis:write:all)`
 
-##
+<br>
+<br>
 
 # Plan de Implementacion (Aspecto General)
 Este proyecto resuelve la falta de manejo de las licencias con las que la organizacion cuenta para la utilizacion de sus equipos de diagnóstico para vehiculos. Dentro de estos equipos se instala un software que obligatoriamente solicita un archivo de licencia.
@@ -154,26 +173,39 @@ Los recursos necesarios para iniciar a trabajar con este proyecto son basicos, c
 
 Al desplegar este proyecto se espera que la empresa beneficiada continue dandole uso y actualizando la aplicacion de manera que se tenga el control de licencias que se busca durante un largo tiempo.
 
-##
+<br>
+<br>
 
 # Plan de Implementacion (Aspecto Tecnico)
 ## Modulos de codigo necesarios
 - Modulos de Rutas
 - Modulos de Funciones
 
+<br>
+
 ## Metodos de almacenamiento requeridos
 El metodo optimo para este proyecto es almacenamiento de archivos locales.
+
+<br>
 
 ## Plan para la codificacion de los modulos
 Para la codificacion de los moduos del proyecto primero se revisan los requerimieentos, seguido se construyen las rutas o funciones que se lleguen a necesitar, a medida que se avanza se necesitaran modulos especificos los cualles se tendran que construir, al momento no pudo especificar mas.
 
+<br>
+
 ## Plan para la verificacion de la calidad del producto (pruebas manuales de los casos de uso, pruebas automatizadas del caso de uso)
 Estas pruebas se realizaran almacenando nuevos registros, algunos de ellos con diferentes entradas erroneas para ver que es lo que se necesita reparar, por ejemplo, la validacion de formatos de archivos que se podran recibir, los formatos de fecha, el tamaño maximo de los archivos de licencia, entre otros casos que se realizaran para probar la funcionalidad y calidad del proyecto.
 
+<br>
+
 ## Plan para el despliegue del proyecto de codigo. `+++`
+
+<br>
+
 ## Plan para realizar reportes de opercion y estatus actual del programa. `+++`
 
-##
+<br>
+
 ##
 
 # Evaluacion - Computo en la nube
@@ -216,6 +248,8 @@ Estas pruebas se realizaran almacenando nuevos registros, algunos de ellos con d
 | ------------------------ | ----------------------------------------- |
 | Inclusión de mockups     | d37838c05276e244d79a4364ab49dd8ed6f0ece2  |
 | Descripción de mockups   | b97ce392a9b7472cf4eaa7180d8a389ea63a49d1  |
+
+<br>
 
 ## Descripción de mockups.
 El mockup `docs/assets/odis-store_0001_new-visualization` muestra la vista previa de nuevos registros de equipos de diagnóstico, se solicita a traves de campos de entradas los datos necesarios para un almacenamiento exitos, se solictan los siguuientes datos, la marca del equipo, el modelo de este, su número de serie, seleccionar un archivo local que debe tener un formato estricto `.dat` y con un tamaño menor a 2MB, de otro modo no se aceptara el archivo, finalmete seleccionar la fecha en la que se esta guardando ese archivo de licencia. El botón `Registrar` ejecuta la funcion de almacenamiento.
