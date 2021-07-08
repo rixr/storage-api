@@ -5,7 +5,7 @@
 Este proyecto almacena licencias con extensión de archivo `.dat` para la utilización del software de diagnóstico para vehículos llamado "Offboard Diagnostic Information System", registra equipos de diagnóstico, actualiza los registros previos y muestra información especifica de cada uno de ellos, entre estos elementos te permite descargar su respectivo arrchivo de licencia.
 
 ## Entrada del proyecto en la organizacion
-Este proyecto ayuda en la operacion de la empresa Emporio Automotriz Volkswagen de Tijuana, facilitando el manejo de los recursos tecnologicos que utiliza el taller de servicio cuando se adquieren nuevos equipos de diagnostico.
+Este proyecto ayuda en la operacion de la empresa Emporio Automotriz Volkswagen de Tijuana, facilitando el manejo de los recursos tecnologicos que utiliza el taller de servicio cuando se adquieren nuevos equipos de diagnóstico.
 
 ## Modelado de datos
 El proyecto cuenta con las siguientes entidades:
@@ -28,7 +28,7 @@ El presente proyecto puede hacer las siguientes consultas:
 	- Dentro se encuentra la licencia asignada
 - Lista de equipos de diagnóstico
 	- Muestra todos los equipos
-	- Tambien en especifico por numero de Serie
+	- Tambien en especifico por número de Serie
 
 ## Operaciones de datos
 A continuacion se explica las diferentes maneras en las que se puede interactuar con el servidor:
@@ -94,7 +94,8 @@ En el primer ejemplo se muestra un mensaje que acepta el servidor, en el segundo
 En esta seccion se muestra un ejemplo de como recibe los datos el servidor, seguido de una explicacion de los que sucede despues.
 ```
 POST /odis-store/new
-
+```
+```
 curl -vq http://localhost:8080/odis-store/new \
     -X POST \
     -H 'ORIGIN: http://localhost:1234' \
@@ -109,7 +110,8 @@ curl -vq http://localhost:8080/odis-store/new \
 
 ```
 GET /odis-store/list
-
+```
+```
 curl -vq http://localhost:8080/odis-store/list \
     -X GET \
     -H 'Content-Type: application/json' \
@@ -120,18 +122,20 @@ curl -vq http://localhost:8080/odis-store/list \
 
 ```
 GET /odis-store/<serial_number>
-
+```
+```
 curl -vq http://localhost:8080/odis-store/1234567 \
     -X GET \
     -H 'Content-Type: application/json' \
 		-- data '{"brand", "model", "serial_number", "license"}'
 ```
-- 200, regresa datos del equipo dado el numero de serie.
+- 200, regresa datos del equipo dado el número de serie.
 - D.O.M, 500, regresa mensaje de fallo.
 
 ```
 POST /odis-store/<serial_number>
-
+```
+```
 curl -vq http://localhost:8080/odis-store/1234567 \
     -X POST \
     -H 'Content-Type: application/json' \
@@ -139,7 +143,7 @@ curl -vq http://localhost:8080/odis-store/1234567 \
 		"serial_number":"1234567",
 		"license":[{"file": license2.dat, "date": "02/02/1970" } ]}'
 ```
-- 200, actualizar información de un equipo dado el numero de serie.
+- 200, actualizar información de un equipo dado el número de serie.
 - D.O.M, 500, regresa mensaje de fallo.
 
 ## Autenticacion y autorizacion de usuarios
@@ -148,11 +152,11 @@ Para este proyecto en especifico existiran dos usuarios, ambos con privilegios d
 	- administrador: `(app:odis:read:all, app:odis:write:all)`
 
 # Plan de Implementacion (Aspecto General)
-Este proyecto resuelve la falta de manejo de las licencias con las que la organizacion cuenta para la utilizacion de sus equipos de diagnostico para vehiculos. Dentro de estos equipos se instala un software que obligatoriamente solicita un archivo de licencia.
+Este proyecto resuelve la falta de manejo de las licencias con las que la organizacion cuenta para la utilizacion de sus equipos de diagnóstico para vehiculos. Dentro de estos equipos se instala un software que obligatoriamente solicita un archivo de licencia.
 
 Una de las motivaciones para la realizacion de este proyecto es ofrecer una herramienta a la organizacion que le permita administrar estos recursos tecnologicos ya que nunca antes se habia tenido esta posibilidad y que cubre la necesidad de tomar el control dado la regularidad con la que se presentan estas situaciones donde se requiere una herramienta como esta.
 
-Las personas que notaran el impacto que puede tener este proyecto son las involucradas en los departamentos de Sistemas y del taller de Servicio, que son los que diariamente trabajan con estos equipos de diagnostico.
+Las personas que notaran el impacto que puede tener este proyecto son las involucradas en los departamentos de Sistemas y del taller de Servicio, que son los que diariamente trabajan con estos equipos de diagnóstico.
 
 Los recursos necesarios para iniciar a trabajar con este proyecto son basicos, como recurso humano estan los administradores, quienes llevaran el manejo de la aplicacion/herramienta, los recursos de computo necesarios son una computadora, de preferencia portatil y la infraestructura necesaria un pequeño servidor privado para trabajar de manera local.
 
@@ -170,7 +174,47 @@ El metodo optimo para este proyecto es almacenamiento de archivos locales.
 Para la codificacion de los moduos del proyecto primero se revisan los requerimieentos, seguido se construyen las rutas o funciones que se lleguen a necesitar, a medida que se avanza se necesitaran modulos especificos los cualles se tendran que construir, al momento no pudo especificar mas.
 
 ## Plan para la verificacion de la calidad del producto (pruebas manuales de los casos de uso, pruebas automatizadas del caso de uso)
-Estas pruebas se realizaran almacenando nuevos registros, algunos de ellos con diferentes entradas erroneas para ver que es lo que se necesita reparar, por ejemplo, la validacion de formatos de archivos que se podran recibir, los formatos de fecha, el tamaño maximo de los archivos de licencia, entre otros casos que se realizaran para probar la funcionalidad y calidad del proyecto. 
+Estas pruebas se realizaran almacenando nuevos registros, algunos de ellos con diferentes entradas erroneas para ver que es lo que se necesita reparar, por ejemplo, la validacion de formatos de archivos que se podran recibir, los formatos de fecha, el tamaño maximo de los archivos de licencia, entre otros casos que se realizaran para probar la funcionalidad y calidad del proyecto.
 
 ## Plan para el despliegue del proyecto de codigo. `OPCIONAL +++`
 ## Plan para realizar reportes de opercion y estatus actual del programa. `OPCIONAL +++`
+
+# Evaluacion - Computo en la nube
+1. Crear un fork del proyecto storage-api
+**Señalar cual es el commit-hash a partir de haber realizado el fork**
+
+| Concepto                       | Commit Hash                               |
+| ------------------------------ | ----------------------------------------- |
+| Creacion de Fork del proyecto  | 828c4fe16e7ca2dd34fc983c698bffeed8be0980  |
+
+2. Crear los archivos correspondientes a su proyecto, y someterlos a control de versiones.  **Señalar el commit-hash que contiene la creación de dichos archivos.**
+
+| Concepto                                      | Commit Hash                               |
+| --------------------------------------------- | ----------------------------------------- |
+| Creacion del archivo `/docs/odis-store.md`    | 828c4fe16e7ca2dd34fc983c698bffeed8be0980  |
+| Creacion del archivo `/routes/odis-store.py`  | d743ef7775714eb988457aa3ae39ffc75596106f  |
+| Creacion del archivo `/modules/odis-store.py` | de564db1b86ab52787ce7ecf5382d34af0a2a633  |
+| Creacion del archivo `/models/odis-store.py`  | ed17aa264fbaf14a02c94c7cad015f99c957d905  |
+
+3. Crear todas las rutas especificadas en su archivo de documentación dentro de su archivo en la carpeta routes, y todas deben de responder 501, con Content-Type: application/json, y un cuerpo de respuesta en formato json con 2 llaves, code y message, el message debe contener el mensaje, Not Implemented.
+ **Señalar el commit-hash que contiene la codificacion de las rutas.**
+
+ | Concepto                                            | Commit Hash                               |
+ | --------------------------------------------------- | ----------------------------------------- |
+ | Creacion de rutas dentro de `/routes/odis-store.py` | e8294bf9153d9f6269a9a99a5f200ede7d6cb68d  |
+
+4. Crear en su carpeta de modulos funciones que emulen las interacciones con el almacén de archivos o datos, es decir que si necesitas una función de consulta, crear una función que retorne una consulta simulada con datos codificados como constantes, y si necesitas crear objetos funciones que retornen simulando una creación exitosa.
+**Señalar el commit-hash que contiene la codificacion de estas funciones asistentes.**
+
+| Concepto                                            | Commit Hash                               |
+| --------------------------------------------------- | ----------------------------------------- |
+| Lorem Ipsum` | Lorem Ipsum  |
+
+5. Crear mock ups, de las vistas que desean implementar, utilizando MoqUps (conectar a su google drive).
+– Una vez concluidas las propuestas de vistas exportar a imagen, e incluir en el documento una explicacion de los datos expresados en las vistas emparejandolos con que endpoints contienen dicha informacion o a cual endpoint de su proyecto, estos activan.
+– Las imagenes deberan ser nombradas como ./docs/assets/--.png
+**Señalar el commit-hash que contiene la inclusión de estas descripciones al documento, junto con los commits que contienen las imagenes.**
+
+| Concepto             | Commit Hash                               |
+| -------------------- | ----------------------------------------- |
+| Inclusión de mockups | d37838c05276e244d79a4364ab49dd8ed6f0ece2  |
