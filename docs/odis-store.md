@@ -215,9 +215,10 @@ Estas pruebas se realizaran almacenando nuevos registros, algunos de ellos con d
 – Las imagenes deberan ser nombradas como `./docs/assets/--.png`
 **Señalar el commit-hash que contiene la inclusión de estas descripciones al documento, junto con los commits que contienen las imagenes.**
 
-| Concepto               | Commit Hash                               |
-| ---------------------- | ----------------------------------------- |
-| Inclusión de mockups   | d37838c05276e244d79a4364ab49dd8ed6f0ece2  |
+| Concepto                 | Commit Hash                               |
+| ------------------------ | ----------------------------------------- |
+| Inclusión de mockups     | d37838c05276e244d79a4364ab49dd8ed6f0ece2  |
+| Descripción de mockups   | b97ce392a9b7472cf4eaa7180d8a389ea63a49d1  |
 
 ## Descripción de mockups.
 El mockup `docs/assets/odis-store_0001_new-visualization` muestra la vista previa de nuevos registros de equipos de diagnóstico, se solicita a traves de campos de entradas los datos necesarios para un almacenamiento exitos, se solictan los siguuientes datos, la marca del equipo, el modelo de este, su número de serie, seleccionar un archivo local que debe tener un formato estricto `.dat` y con un tamaño menor a 2MB, de otro modo no se aceptara el archivo, finalmete seleccionar la fecha en la que se esta guardando ese archivo de licencia. El botón `Registrar` ejecuta la funcion de almacenamiento.
