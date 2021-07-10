@@ -217,11 +217,13 @@ Estas pruebas se realizaran almacenando nuevos registros, algunos de ellos con d
 
 <br>
 
-## Plan para el despliegue del proyecto de codigo. `+++`
+## Plan para el despliegue del proyecto de codigo.
+> Pendiente
 
 <br>
 
-## Plan para realizar reportes de opercion y estatus actual del programa. `+++`
+## Plan para realizar reportes de opercion y estatus actual del programa.
+> Pendiente
 
 <br>
 
