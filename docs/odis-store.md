@@ -23,37 +23,37 @@ El proyecto cuenta con las siguientes entidades:
 ## Interacciones de datos
 La manera en la que se relacionan nuestras entidades son de la siguiente manera:
 ### Equipo de diagnóstico
-	- Permite registro de un equipo.
-	- Tambien la actualización a esos equipos.
+- Permite registro de un equipo.
+- Tambien la actualización a esos equipos.
 ### Licencias
-	- Cuando se hace un registro nuevo obligatoriamente se solicita de una licencia.
-		- Para ello solicitamos un archivo con formato `.dat` para asignarlo a un equipo de diagnóstico.
+- Cuando se hace un registro nuevo obligatoriamente se solicita de una licencia.
+- Para ello solicitamos un archivo con formato `.dat` para asignarlo a un equipo de diagnóstico.
 
 <br>
 
 ## Consultas de datos
 El presente proyecto puede hacer las siguientes consultas:
 - Consulta de un equipo de diagnóstico
-	- Muestra los campos basicos del equipo
-	- Dentro se encuentra la licencia asignada
+- Muestra los campos basicos del equipo
+- Dentro se encuentra la licencia asignada
 - Lista de equipos de diagnóstico
-	- Muestra todos los equipos
-	- Tambien en especifico por número de Serie
+- Muestra todos los equipos
+- Tambien en especifico por número de Serie
 
 <br>
 
 ## Operaciones de datos
 A continuacion se explica las diferentes maneras en las que se puede interactuar con el servidor:
 ### Registra nuevo equipo de diagnóstico
-	- Para hacer un nuevo registro solicitamos la Marca, el Modelo y el Número de Serie del equipo, este último es el identificador.
-	- En el registo se solicita el archivo de la licencia que se asignara, ademas de la fecha en la que se esta asignando.
+- Para hacer un nuevo registro solicitamos la Marca, el Modelo y el Número de Serie del equipo, este último es el identificador.
+- En el registo se solicita el archivo de la licencia que se asignara, ademas de la fecha en la que se esta asignando.
 
 ### Actualiza registro de equipo de diagnóstico
-	- Para lograr la Actualización primero se da de baja la licencia asignada.
-	- Seguido se debe reasignar una licencia nueva.
+- Para lograr la Actualización primero se da de baja la licencia asignada.
+- Seguido se debe reasignar una licencia nueva.
 
 ### Muestra información de los equipos de diagnóstico
-	- En forma de lista  muestra todos los equipos con los que se cuentan, activos e inactivos.
+- En forma de lista  muestra todos los equipos con los que se cuentan, activos e inactivos.
 
 <br>
 
@@ -86,25 +86,25 @@ En el primer ejemplo se muestra un mensaje que acepta el servidor, en el segundo
 ### 2. Respuesta exitosa de registro de equipo
 ```
 {
-    "code": 200,
-    "message": "registro exitoso"
-  }
+	"code": 200,
+  "message": "registro exitoso"
+}
 ```
 
 ### 3. Mensaje de fallo de almacenamiento por tipo de archivo incorrecto
 ```
 {
-    "code": 500,
-    "message": "almacenamiento fallido, formato de archivo incorrecto"
-  }
+	"code": 500,
+	"message": "almacenamiento fallido, formato de archivo incorrecto"
+}
 ```
 
 ### 4. Mensaje de fallo de almacenamiento por tamaño de archivo > 2MB
 ```
 {
-    "code": 500,
-    "message": "almacenamiento fallido, tamaño de archivo excedente"
-  }
+	"code": 500,
+  "message": "almacenamiento fallido, tamaño de archivo excedente"
+}
 ```
 
 <br>
@@ -115,7 +115,13 @@ En esta seccion se muestra un ejemplo de como recibe los datos el servidor, segu
 POST /odis-store/new
 ```
 ```
-curl -vq http://localhost:8080/odis-store/new -X POST -H 'ORIGIN: http://localhost:1234' -H 'Content-Type: application/json' --data '{ "brand": "getac", "model": "vas 6150e", "serial_number": "1324567", "license":[{"file": license.dat, "date": "01/01/1970" }]}'
+curl -vq http://localhost:8080/odis-store/new \
+		-X POST \
+		-H 'ORIGIN: http://localhost:1234' \
+		-H 'Content-Type: application/json' \
+		--data '{ "brand": "getac", "model": "vas 6150e",
+		"serial_number": "1324567", "license":[{"file": license.dat,
+		"date": "01/01/1970" }]}'
 ```
 - Recibe una estructura de registro de equipo de diagnóstico.
 - 200, registrar una nuevo equipo, habilita un estado **Activo** y regresa un mensaje de éxito.
@@ -127,7 +133,10 @@ curl -vq http://localhost:8080/odis-store/new -X POST -H 'ORIGIN: http://localho
 GET /odis-store/list
 ```
 ```
-curl -vq http://localhost:8080/odis-store/list -X GET -H 'Content-Type: application/json' -- data '{"serial_number"}'
+curl -vq http://localhost:8080/odis-store/list \
+		-X GET \
+		-H 'Content-Type: application/json' \
+		-- data '{"serial_number"}'
 ```
 - 200, regresa una lista de todos los equipos de diagnóstico.
 - D.O.M, 500, regresa mensaje de fallo.
@@ -138,7 +147,10 @@ curl -vq http://localhost:8080/odis-store/list -X GET -H 'Content-Type: applicat
 GET /odis-store/<serial_number>
 ```
 ```
-curl -vq http://localhost:8080/odis-store/1234567 -X GET -H 'Content-Type: application/json' -- data '{"brand", "model", "serial_number", "license"}'
+curl -vq http://localhost:8080/odis-store/1234567 \
+		-X GET \
+		-H 'Content-Type: application/json' \
+		-- data '{"brand", "model", "serial_number", "license"}'
 ```
 - 200, regresa datos del equipo dado el número de serie.
 - D.O.M, 500, regresa mensaje de fallo.
@@ -151,7 +163,10 @@ POST /odis-store/<serial_number>
 ```
 curl -vq http://localhost:8080/odis-store/1234567 \
     -X POST \
-    -H 'Content-Type: application/json' -- data '{"brand":"foo", "model":"foo", "serial_number":"1234567", "license":[{"file": license2.dat, "date": "02/02/1970" } ]}'
+    -H 'Content-Type: application/json' \
+		-- data '{"brand":"foo", "model":"foo",
+		"serial_number":"1234567", "license":[{"file": license2.dat,
+		"date": "02/02/1970" } ]}'
 ```
 - 200, actualizar información de un equipo dado el número de serie.
 - D.O.M, 500, regresa mensaje de fallo.
@@ -161,7 +176,7 @@ curl -vq http://localhost:8080/odis-store/1234567 \
 ## Autenticacion y autorizacion de usuarios
 Para este proyecto en especifico existiran dos usuarios, ambos con privilegios de administrador, por lo tanto tendran todos los permisos permitidos.
 - Leer, crear y editar todo.
-	- administrador: `(app:odis:read:all, app:odis:write:all)`
+- administrador: `(app:odis:read:all, app:odis:write:all)`
 
 <br>
 <br>
@@ -212,7 +227,7 @@ Estas pruebas se realizaran almacenando nuevos registros, algunos de ellos con d
 
 ##
 
-# Evaluacion - Computo en la nube
+# Commit-hashes
 1. Crear un fork del proyecto storage-api
 **Señalar cual es el commit-hash a partir de haber realizado el fork**
 
@@ -253,17 +268,18 @@ Estas pruebas se realizaran almacenando nuevos registros, algunos de ellos con d
 
 5. Crear mock ups, de las vistas que desean implementar, utilizando MoqUps (conectar a su google drive).
 – Una vez concluidas las propuestas de vistas exportar a imagen, e incluir en el documento una explicacion de los datos expresados en las vistas emparejandolos con que endpoints contienen dicha informacion o a cual endpoint de su proyecto, estos activan.
-– Las imagenes deberan ser nombradas como `./docs/assets/--.png`
+– Las imagenes deberan ser nombradas como `./docs/assets/<slug>_<No. w/4 digits>_<description>.png`
+
+<br>
+
+## Descripción de mockups.
+El mockup ![New register visualization](docs/assets/odis-store_0001_new-visualization) muestra la vista previa de nuevos registros de equipos de diagnóstico, se solicita a traves de campos de entradas los datos necesarios para un almacenamiento exitos, se solictan los siguuientes datos, la marca del equipo, el modelo de este, su número de serie, seleccionar un archivo local que debe tener un formato estricto `.dat` y con un tamaño menor a 2MB, de otro modo no se aceptara el archivo, finalmete seleccionar la fecha en la que se esta guardando ese archivo de licencia. El botón `Registrar` ejecuta la funcion de almacenamiento.
+
+En el siguiente mockup ![List of registers visualization](docs/assets/odis-store_0002_list-visualization) se observa una taba que contiene todos los equipos registrados con anterioridad, su respectiva licencia asignada, esta licencia puede ser descargada dandole un click, finalmete hay un boton para editar el registro deseado; este botón nos redirige hacia otra ventana, a la ventana de ![Updete register visualization](docs/assets/odis-store_0003_update-visualization), aca se muestran los datos basicos del equipo seleccionado, pero los campos de `Licencia` y `Fecha` son modificables, ya que de es parte de esta ventana, ademas de ver los datos individuales del equipo puedes actualizar esa misma información. Para cambiar un archivo de licencia debes de buscarla en tu equipo, seleccionarlo y notaras que se reemplaza el archivo, despues debes de cambiar el campo de fecha, una vez realizado el proceso el botón de `Actualizar` ejecuta una funcion que hace los cambios y los guarda.
+
 **Señalar el commit-hash que contiene la inclusión de estas descripciones al documento, junto con los commits que contienen las imagenes.**
 
 | Concepto                 | Commit Hash                               |
 | ------------------------ | ----------------------------------------- |
 | Inclusión de mockups     | d37838c05276e244d79a4364ab49dd8ed6f0ece2  |
 | Descripción de mockups   | b97ce392a9b7472cf4eaa7180d8a389ea63a49d1  |
-
-<br>
-
-## Descripción de mockups.
-El mockup `docs/assets/odis-store_0001_new-visualization` muestra la vista previa de nuevos registros de equipos de diagnóstico, se solicita a traves de campos de entradas los datos necesarios para un almacenamiento exitos, se solictan los siguuientes datos, la marca del equipo, el modelo de este, su número de serie, seleccionar un archivo local que debe tener un formato estricto `.dat` y con un tamaño menor a 2MB, de otro modo no se aceptara el archivo, finalmete seleccionar la fecha en la que se esta guardando ese archivo de licencia. El botón `Registrar` ejecuta la funcion de almacenamiento.
-
-En el siguiente mockup `docs/assets/odis-store_0002_list-visualization` se observa una taba que contiene todos los equipos registrados con anterioridad, su respectiva licencia asignada, esta licencia puede ser descargada dandole un click, finalmete hay un boton para editar el registro deseado; este botón nos redirige hacia otra ventana, a la ventana de `docs/assets/odis-store_0003_update-visualization`, aca se muestran los datos basicos del equipo seleccionado, pero los campos de `Licencia` y `Fecha` son modificables, ya que de es parte de esta ventana, ademas de ver los datos individuales del equipo puedes actualizar esa misma información. Para cambiar un archivo de licencia debes de buscarla en tu equipo, seleccionarlo y notaras que se reemplaza el archivo, despues debes de cambiar el campo de fecha, una vez realizado el proceso el botón de `Actualizar` ejecuta una funcion que hace los cambios y los guarda.
