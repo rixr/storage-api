@@ -73,12 +73,12 @@ En el primer ejemplo se muestra un mensaje que acepta el servidor, en el segundo
 ### 1. registro de un nuevo equipo
 ```
 {
- "brand": "getac",
- "model": "vas 6150e",
- "serial_number" : "1234567",
- "license" : [{
-	"file" : license.dat,
-    "date" : "01-01-1970"
+  "brand": "getac",
+  "model": "vas 6150e",
+  "serial_number" : "1234567",
+  "license" : [{
+    "code": 200,
+    "message": "registro exitoso"
   }]
 }
 ```
