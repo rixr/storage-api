@@ -279,11 +279,13 @@ Estas pruebas se realizaran almacenando nuevos registros, algunos de ellos con d
 En esta ventana se muestra la vista previa de nuevos registros de equipos de diagnóstico, se solicita a traves de campos de entradas los datos necesarios para un almacenamiento exitos, se solictan los siguuientes datos, la marca del equipo, el modelo de este, su número de serie, seleccionar un archivo local que debe tener un formato estricto `.dat` y con un tamaño menor a 2MB, de otro modo no se aceptara el archivo, finalmete seleccionar la fecha en la que se esta guardando ese archivo de licencia. El botón `Registrar` ejecuta la funcion de almacenamiento.
 
 <br>
+<br>
 
 ![List of registers visualization](https://github.com/rixr/storage-api/blob/master/docs/assets/odis-store_0002_list-visualization.png?raw=true)
 
 En este mockup se observa una tabla que contiene todos los equipos registrados con anterioridad, su respectiva licencia asignada, esta licencia puede ser descargada dandole un click en el archivo de la licencia, finalmete en la ultima columna hay botones para editar el registro deseado;
 
+<br>
 <br>
 
 ![Updete register visualization](https://github.com/rixr/storage-api/blob/master/docs/assets/odis-store_0003_update-visualization.png?raw=true)
