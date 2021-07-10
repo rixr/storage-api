@@ -77,7 +77,7 @@ En el primer ejemplo se muestra un mensaje que acepta el servidor, en el segundo
  "model": "vas 6150e",
  "serial_number" : "1234567",
  "license" : [{
-	  "file" : license.dat,
+	"file" : license.dat,
     "date" : "01-01-1970"
   }]
 }
@@ -116,12 +116,12 @@ POST /odis-store/new
 ```
 ```
 curl -vq http://localhost:8080/odis-store/new \
-	-X POST \
-	-H 'ORIGIN: http://localhost:1234' \
-	-H 'Content-Type: application/json' \
-	--data '{ "brand": "getac", "model": "vas 6150e",
-	"serial_number": "1324567", "license":[{"file": license.dat,
-	"date": "01/01/1970" }]}'
+  -X POST \
+  -H 'ORIGIN: http://localhost:1234' \
+  -H 'Content-Type: application/json' \
+  --data '{ "brand": "getac", "model": "vas 6150e",
+  "serial_number": "1324567", "license":[{"file": license.dat,
+  "date": "01/01/1970" }]}'
 ```
 - Recibe una estructura de registro de equipo de diagnóstico.
 - 200, registrar una nuevo equipo, habilita un estado **Activo** y regresa un mensaje de éxito.
@@ -134,9 +134,9 @@ GET /odis-store/list
 ```
 ```
 curl -vq http://localhost:8080/odis-store/list \
-	-X GET \
-	-H 'Content-Type: application/json' \
-	-- data '{"serial_number"}'
+  -X GET \
+  -H 'Content-Type: application/json' \
+  -- data '{"serial_number"}'
 ```
 - 200, regresa una lista de todos los equipos de diagnóstico.
 - D.O.M, 500, regresa mensaje de fallo.
@@ -148,9 +148,9 @@ GET /odis-store/<serial_number>
 ```
 ```
 curl -vq http://localhost:8080/odis-store/1234567 \
-	-X GET \
-	-H 'Content-Type: application/json' \
-	-- data '{"brand", "model", "serial_number", "license"}'
+  -X GET \
+  -H 'Content-Type: application/json' \
+  -- data '{"brand", "model", "serial_number", "license"}'
 ```
 - 200, regresa datos del equipo dado el número de serie.
 - D.O.M, 500, regresa mensaje de fallo.
@@ -162,7 +162,7 @@ POST /odis-store/<serial_number>
 ```
 ```
 curl -vq http://localhost:8080/odis-store/1234567 \
-	-X POST \
+  -X POST \
   -H 'Content-Type: application/json' \
   -- data '{"brand":"foo", "model":"foo",
   "serial_number":"1234567", "license":[{"file": license2.dat,
