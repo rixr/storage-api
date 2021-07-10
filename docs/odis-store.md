@@ -73,37 +73,37 @@ En el primer ejemplo se muestra un mensaje que acepta el servidor, en el segundo
 ### 1. registro de un nuevo equipo
 ```
 {
-  "brand": "getac",
-  "model": "vas 6150e",
-  "serial_number" : "1234567",
-  "license" : [{
-      "file" : license.dat,
-      "date" : "01-01-1970"
-    }]
+ "brand": "getac",
+ "model": "vas 6150e",
+ "serial_number" : "1234567",
+ "license" : [{
+	  "file" : license.dat,
+    "date" : "01-01-1970"
+  }]
 }
 ```
 
 ### 2. Respuesta exitosa de registro de equipo
 ```
 {
-"code": 200,
-"message": "registro exitoso"
+ "code": 200,
+ "message": "registro exitoso"
 }
 ```
 
 ### 3. Mensaje de fallo de almacenamiento por tipo de archivo incorrecto
 ```
 {
-"code": 500,
-"message": "almacenamiento fallido, formato de archivo incorrecto"
+ "code": 500,
+ "message": "almacenamiento fallido, formato de archivo incorrecto"
 }
 ```
 
 ### 4. Mensaje de fallo de almacenamiento por tamaño de archivo > 2MB
 ```
 {
-"code": 500,
-"message": "almacenamiento fallido, tamaño de archivo excedente"
+ "code": 500,
+ "message": "almacenamiento fallido, tamaño de archivo excedente"
 }
 ```
 
@@ -162,11 +162,11 @@ POST /odis-store/<serial_number>
 ```
 ```
 curl -vq http://localhost:8080/odis-store/1234567 \
-  -X POST \
+	-X POST \
   -H 'Content-Type: application/json' \
-	-- data '{"brand":"foo", "model":"foo",
-	"serial_number":"1234567", "license":[{"file": license2.dat,
-	"date": "02/02/1970" } ]}'
+  -- data '{"brand":"foo", "model":"foo",
+  "serial_number":"1234567", "license":[{"file": license2.dat,
+  "date": "02/02/1970" } ]}'
 ```
 - 200, actualizar información de un equipo dado el número de serie.
 - D.O.M, 500, regresa mensaje de fallo.
