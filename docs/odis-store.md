@@ -3,13 +3,13 @@
 
 <br>
 
-# Descripcion general del proyecto
-Este proyecto almacena licencias con extensión de archivo `.dat` para la utilización del software de diagnóstico para vehículos llamado "Offboard Diagnostic Information System", registra equipos de diagnóstico, actualiza los registros previos y muestra información especifica de cada uno de ellos, entre estos elementos te permite descargar su respectivo archivo de licencia.
+# Descripción general del proyecto
+Este proyecto almacena licencias con extensión de archivo `.dat` para la utilización del software de diagnóstico para vehículos llamado "Offboard Diagnostic Information System", registra equipos de diagnóstico, actualiza los registros previos y muestra información específica de cada uno de ellos, entre estos elementos te permite descargar su respectivo archivo de licencia.
 
 <br>
 
-## Entrada del proyecto en la organizacion
-Este proyecto ayuda en la operacion de la empresa Emporio Automotriz Volkswagen de Tijuana, facilitando el manejo de los recursos tecnologicos que utiliza el taller de servicio cuando se adquieren nuevos equipos de diagnóstico.
+## Entrada del proyecto en la organización
+Este proyecto ayuda en la operación de la empresa Emporio Automotriz Volkswagen de Tijuana, facilitando el manejo de los recursos tecnológicos que utiliza el taller de servicio cuando se adquieren nuevos equipos de diagnóstico.
 
 <br>
 
@@ -34,22 +34,22 @@ La manera en la que se relacionan nuestras entidades son de la siguiente manera:
 ## Consultas de datos
 El presente proyecto puede hacer las siguientes consultas:
 - Consulta de un equipo de diagnóstico
-- Muestra los campos basicos del equipo
-- Dentro se encuentra la licencia asignada
+  - Muestra los campos basicos del equipo
+  - Dentro se encuentra la licencia asignada
 - Lista de equipos de diagnóstico
-- Muestra todos los equipos
-- Tambien en especifico por número de Serie
+  - Muestra todos los equipos
+  - Tambien en especifico por número de Serie
 
 <br>
 
 ## Operaciones de datos
-A continuacion se explica las diferentes maneras en las que se puede interactuar con el servidor:
+A continuación se explica las diferentes maneras en las que se puede interactuar con el servidor:
 ### Registra nuevo equipo de diagnóstico
 - Para hacer un nuevo registro solicitamos la Marca, el Modelo y el Número de Serie del equipo, este último es el identificador.
 - En el registo se solicita el archivo de la licencia que se asignara, ademas de la fecha en la que se esta asignando.
 
 ### Actualiza registro de equipo de diagnóstico
-- Para lograr la Actualización primero se da de baja la licencia asignada.
+- Para lograr la actualización primero se da de baja la licencia asignada.
 - Seguido se debe reasignar una licencia nueva.
 
 ### Muestra información de los equipos de diagnóstico
@@ -58,7 +58,7 @@ A continuacion se explica las diferentes maneras en las que se puede interactuar
 <br>
 
 ## Rutas HTTP
-En la siguiente tabla se especifica cuales son las rutas con las que cuenta este proyecto, ademas del metodo HTTP que se utiliza, la ruta como tal y una breve descripcion de su funcion.
+En la siguiente tabla se específica cuales son las rutas con las que cuenta este proyecto, ademas del método HTTP que se utiliza, la ruta como tal y una breve descripción de su funcion.
 | Método | Path                          | Descripción                                         |
 | -------|-------------------------------|-----------------------------------------------------|
 | POST   | `/odis-store/new`             | Almacena nuevos registros de equipos de diagnóstico |
@@ -182,9 +182,9 @@ Para este proyecto en especifico existiran dos usuarios, ambos con privilegios d
 <br>
 
 # Plan de Implementacion (Aspecto General)
-Este proyecto resuelve la falta de manejo de las licencias con las que la organizacion cuenta para la utilizacion de sus equipos de diagnóstico para vehiculos. Dentro de estos equipos se instala un software que obligatoriamente solicita un archivo de licencia.
+Este proyecto resuelve la falta de manejo de las licencias con las que la organización cuenta para la utilizacion de sus equipos de diagnóstico para vehiculos. Dentro de estos equipos se instala un software que obligatoriamente solicita un archivo de licencia.
 
-Una de las motivaciones para la realizacion de este proyecto es ofrecer una herramienta a la organizacion que le permita administrar estos recursos tecnologicos ya que nunca antes se habia tenido esta posibilidad y que cubre la necesidad de tomar el control dado la regularidad con la que se presentan estas situaciones donde se requiere una herramienta como esta.
+Una de las motivaciones para la realizacion de este proyecto es ofrecer una herramienta a la organización que le permita administrar estos recursos tecnológicos ya que nunca antes se habia tenido esta posibilidad y que cubre la necesidad de tomar el control dado la regularidad con la que se presentan estas situaciones donde se requiere una herramienta como esta.
 
 Las personas que notaran el impacto que puede tener este proyecto son las involucradas en los departamentos de Sistemas y del taller de Servicio, que son los que diariamente trabajan con estos equipos de diagnóstico.
 
@@ -196,24 +196,24 @@ Al desplegar este proyecto se espera que la empresa beneficiada continue dandole
 <br>
 
 # Plan de Implementacion (Aspecto Tecnico)
-## Modulos de codigo necesarios
-- Modulos de Rutas
-- Modulos de Funciones
+## Módulos de codigo necesarios
+- Módulos de Rutas
+- Módulos de Funciones
 
 <br>
 
-## Metodos de almacenamiento requeridos
-El metodo optimo para este proyecto es almacenamiento de archivos locales.
+## Métodos de almacenamiento requeridos
+El método optimo para este proyecto es almacenamiento de archivos locales dado a que estos e almacenarán no superan el tamaño de 2MB.
 
 <br>
 
-## Plan para la codificacion de los modulos
-Para la codificacion de los moduos del proyecto primero se revisan los requerimieentos, seguido se construyen las rutas o funciones que se lleguen a necesitar, a medida que se avanza se necesitaran modulos especificos los cuales se tendran que construir, al momento se cuentan con lo mas basicos.
+## Plan para la codificación de los módulos
+Para la codificación de los módulos del proyecto primero se revisan los requerimieentos, seguido se construyen las rutas o funciones que se lleguen a necesitar, a medida que se avanza se necesitaran módulos especificos los cuales se tendrán que construir, al momento se cuenta con los módulos más básicos, por decir un ejemplo, almacenamiento de archivos.
 
 <br>
 
-## Plan para la verificacion de la calidad del producto (pruebas manuales de los casos de uso, pruebas automatizadas del caso de uso)
-Estas pruebas se realizaran almacenando nuevos registros, algunos de ellos con diferentes entradas erroneas para ver que es lo que se necesita reparar, por ejemplo, la validacion de formatos de archivos que se podran recibir, los formatos de fecha, el tamaño maximo de los archivos de licencia, entre otros casos que se realizaran para probar la funcionalidad y calidad del proyecto.
+## Plan para la verificación de la calidad del producto (pruebas manuales de los casos de uso, pruebas automatizadas del caso de uso)
+Estas pruebas se realizarán almacenando nuevos registros, algunos de ellos con diferentes entradas erroneas para ver que es lo que se necesita reparar, por ejemplo, la validación de formatos de archivos que se podran recibir, los formatos de fecha, el tamaño máximo de los archivos de licencia, entre otros casos que se realizarán para probar la funcionalidad y calidad del proyecto.
 
 <br>
 
@@ -235,23 +235,24 @@ Estas pruebas se realizaran almacenando nuevos registros, algunos de ellos con d
 
 | Concepto                       | Commit Hash                               |
 | ------------------------------ | ----------------------------------------- |
-| Creacion de Fork del proyecto  | 828c4fe16e7ca2dd34fc983c698bffeed8be0980  |
+| Creación de Fork del proyecto  | 828c4fe16e7ca2dd34fc983c698bffeed8be0980  |
 
 <br>
 
-2. Crear los archivos correspondientes a su proyecto, y someterlos a control de versiones.  **Señalar el commit-hash que contiene la creación de dichos archivos.**
+2. Crear los archivos correspondientes a su proyecto, y someterlos a control de versiones.  
+**Señalar el commit-hash que contiene la creación de dichos archivos.**
 
 | Concepto                                      | Commit Hash                               |
 | --------------------------------------------- | ----------------------------------------- |
-| Creacion del archivo `/docs/odis-store.md`    | 828c4fe16e7ca2dd34fc983c698bffeed8be0980  |
-| Creacion del archivo `/routes/odis-store.py`  | d743ef7775714eb988457aa3ae39ffc75596106f  |
-| Creacion del archivo `/modules/odis-store.py` | de564db1b86ab52787ce7ecf5382d34af0a2a633  |
-| Creacion del archivo `/models/odis-store.py`  | ed17aa264fbaf14a02c94c7cad015f99c957d905  |
+| Creación del archivo `/docs/odis-store.md`    | 828c4fe16e7ca2dd34fc983c698bffeed8be0980  |
+| Creación del archivo `/routes/odis-store.py`  | d743ef7775714eb988457aa3ae39ffc75596106f  |
+| Creación del archivo `/modules/odis-store.py` | de564db1b86ab52787ce7ecf5382d34af0a2a633  |
+| Creación del archivo `/models/odis-store.py`  | ed17aa264fbaf14a02c94c7cad015f99c957d905  |
 
 <br>
 
 3. Crear todas las rutas especificadas en su archivo de documentación dentro de su archivo en la carpeta routes, y todas deben de responder 501, con `Content-Type: application/json`, y un cuerpo de respuesta en formato json con 2 llaves, code y message, el message debe contener el mensaje, `Not Implemented`.
- **Señalar el commit-hash que contiene la codificacion de las rutas.**
+ **Señalar el commit-hash que contiene la codificación de las rutas.**
 
  | Concepto                                            | Commit Hash                               |
  | --------------------------------------------------- | ----------------------------------------- |
@@ -259,8 +260,8 @@ Estas pruebas se realizaran almacenando nuevos registros, algunos de ellos con d
 
 <br>
 
-4. Crear en su carpeta de modulos funciones que emulen las interacciones con el almacén de archivos o datos, es decir que si necesitas una función de consulta, crear una función que retorne una consulta simulada con datos codificados como constantes, y si necesitas crear objetos funciones que retornen simulando una creación exitosa.
-**Señalar el commit-hash que contiene la codificacion de estas funciones asistentes.**
+4. Crear en su carpeta de módulos funciones que emulen las interacciones con el almacén de archivos o datos, es decir que si necesitas una función de consulta, crear una función que retorne una consulta simulada con datos codificados como constantes, y si necesitas crear objetos funciones que retornen simulando una creación exitosa.
+**Señalar el commit-hash que contiene la codificación de estas funciones asistentes.**
 
 | Concepto                  | Commit Hash                               |
 | ------------------------- | ----------------------------------------- |
@@ -269,32 +270,32 @@ Estas pruebas se realizaran almacenando nuevos registros, algunos de ellos con d
 <br>
 
 5. Crear mock ups, de las vistas que desean implementar, utilizando MoqUps (conectar a su google drive).
-– Una vez concluidas las propuestas de vistas exportar a imagen, e incluir en el documento una explicacion de los datos expresados en las vistas emparejandolos con que endpoints contienen dicha informacion o a cual endpoint de su proyecto, estos activan.
+– Una vez concluidas las propuestas de vistas exportar a imagen, e incluir en el documento una explicación de los datos expresados en las vistas emparejandolos con que endpoints contienen dicha información o a cual endpoint de su proyecto, estos activan.
 – Las imagenes deberan ser nombradas como `./docs/assets/<slug>_<No. w/4 digits>_<description>.png`
 
 <br>
 
 ## Descripción de mockups.
 
-![New register visualization](https://github.com/rixr/storage-api/blob/master/docs/assets/odis-store_0001_new-visualization.png?raw=true)
-
 En esta ventana se muestra la vista previa de nuevos registros de equipos de diagnóstico, se solicita a traves de campos de entradas los datos necesarios para un almacenamiento exitos, se solictan los siguuientes datos, la marca del equipo, el modelo de este, su número de serie, seleccionar un archivo local que debe tener un formato estricto `.dat` y con un tamaño menor a 2MB, de otro modo no se aceptara el archivo, finalmete seleccionar la fecha en la que se esta guardando ese archivo de licencia. El botón `Registrar` ejecuta la funcion de almacenamiento.
 
-<br>
-<br>
+![New register visualization](https://github.com/rixr/storage-api/blob/master/docs/assets/odis-store_0001_new-visualization.png?raw=true)
 
-![List of registers visualization](https://github.com/rixr/storage-api/blob/master/docs/assets/odis-store_0002_list-visualization.png?raw=true)
+<br>
+<br>
 
 En este mockup se observa una tabla que contiene todos los equipos registrados con anterioridad, su respectiva licencia asignada, esta licencia puede ser descargada dandole un click en el archivo de la licencia, finalmete en la ultima columna hay botones para editar el registro deseado;
 
+![List of registers visualization](https://github.com/rixr/storage-api/blob/master/docs/assets/odis-store_0002_list-visualization.png?raw=true)
+
 <br>
 <br>
+
+Esos botones de edición nos redirigen hacia otra ventana, aca se muestran los datos basicos del equipo seleccionado, pero los campos de `Licencia` y `Fecha` son modificables; El proposito de esta ventan es, ademas de ver los datos individuales del equipo poder actualizar los campos anteriormente mencionados. Para cambiar un archivo de licencia debes de buscarla en tu computadora, seleccionarlo y notaras que se reemplaza el archivo, despues debes de cambiar el campo de fecha, una vez realizado el proceso da click al botón de `Actualizar`, este ejecuta una funcion que hace los cambios y los guarda. Si el archivo que se intenta cambiar cumple las validaciones de formato y tamaño el cambio sera exito, de otro modo arrojara un mensaje de fallo.
 
 ![Updete register visualization](https://github.com/rixr/storage-api/blob/master/docs/assets/odis-store_0003_update-visualization.png?raw=true)
 
-Esos botones de edicion nos redirigen hacia otra ventana, aca se muestran los datos basicos del equipo seleccionado, pero los campos de `Licencia` y `Fecha` son modificables; El proposito de esta ventan es, ademas de ver los datos individuales del equipo poder actualizar los campos anteriormente mencionados. Para cambiar un archivo de licencia debes de buscarla en tu computadora, seleccionarlo y notaras que se reemplaza el archivo, despues debes de cambiar el campo de fecha, una vez realizado el proceso da click al botón de `Actualizar`, este ejecuta una funcion que hace los cambios y los guarda. Si el archivo que se intenta cambiar cumple las validaciones de formato y tamaño el cambio sera exito, de otro modo arrojara un mensaje de fallo.
-
-**Señalar el commit-hash que contiene la inclusión de estas descripciones al documento, junto con los commits que contienen las imagenes.**
+**Señalar el commit-hash que contiene la inclusión de estas Descripciones al documento, junto con los commits que contienen las imagenes.**
 
 | Concepto                 | Commit Hash                               |
 | ------------------------ | ----------------------------------------- |
