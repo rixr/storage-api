@@ -197,13 +197,16 @@ Al desplegar este proyecto se espera que la empresa beneficiada continue dandole
 
 # Plan de Implementacion (Aspecto Tecnico)
 ## Módulos de codigo necesarios
+- Almacenamiento de archivos
+- Almacenamiento de texto
+- Llamado de archivos y texto.
 - Módulos de Rutas
 - Módulos de Funciones
 
 <br>
 
 ## Métodos de almacenamiento requeridos
-El método optimo para este proyecto es almacenamiento de archivos locales dado a que estos e almacenarán no superan el tamaño de 2MB.
+El método optimo para este proyecto es almacenamiento de archivos locales dado a que estos no superan el tamaño de 2MB.
 
 <br>
 
