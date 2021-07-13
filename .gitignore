@@ -1,7 +1,7 @@
 .project-prefixes-owners
 .env
 gcloud_key.json
-storage/
+./storage/
 __pycache__/
 *.py[cod]
 *$py.class
