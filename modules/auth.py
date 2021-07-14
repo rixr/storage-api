@@ -67,6 +67,7 @@ def auth_required(*args, **kwargs):
             if not auth_header or not token or not valid_role:
                 response.status = 403
                 return {}
+            request.environ["auth.token"] = token
             return _route_function(*args, **kwargs)
         return _auth_required
     if _route_function_first:

@@ -5,7 +5,8 @@ from pathlib import Path
 try:
     storage_dir = Path(environ["STORAGE_DIR"]).resolve()
 except KeyError:
-    raise Exception("No storage directory set")
+    print("No storage directory set")
+    storage_dir = None
 
 
 def get_file_to_store(collection, filename):

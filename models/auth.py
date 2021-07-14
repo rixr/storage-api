@@ -1,3 +1,4 @@
+import datetime
 import peewee as pe
 from models.base import EnvModel
 
@@ -7,7 +8,8 @@ class User(EnvModel):
     password = pe.CharField()
     email = pe.CharField(unique=True)
     phone = pe.CharField(unique=True)
-    join_date = pe.DateTimeField()
+    join_date = pe.DateTimeField(default=datetime.datetime.now)
+    verified = pe.BooleanField(default=False)
 
 
 class Roles(EnvModel):

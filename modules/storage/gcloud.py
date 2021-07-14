@@ -6,7 +6,8 @@ from google.cloud import storage
 try:
     bucket_name = environ["GCLOUD_BUCKET"]
 except KeyError:
-    raise Exception("No gcloud bucket set")
+    print("No gcloud bucket set")
+    bucket_name = None
 
 
 def get_blob(target):
