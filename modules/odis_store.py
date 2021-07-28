@@ -1,20 +1,29 @@
-from os import environ
-from pathlib import Path
+import json
+from modules.storage import store_string, store_bytes
 
-def get_license_to_store(collection, filename):
-    target = str(Path(collection) / filename)
-    blob = get_blob(target)
-    if blob.exists():
-        raise Exception("License already exists")
-    return blob
 
-def get_storage_license(path=""):
-    target = (storage_dir / path)
-    if not target.exists() or not target.is_file():
-        raise Exception("Does not exists")
-    mime = (guess_type(str(target)) or ["application/octet-stream"])[0]
-    return mime, target.read_bytes()
+def get_license_to_store():
+    pass
 
-def store_string(collection, filename, text):
-    target = get_license_to_store(collection, filename)
-    target.upload_from_string(text)
+def get_storage_license(path=None):
+    pass
+
+def store_new_device(brand=None, model=None, serial_number=None, date=None):
+    filename = f"{brand}_{model}_{serial_number}.json"
+    data = dict(brand=brand, model=model, serial_number=serial_number, date=date)
+    store_string(
+        "odis/device",
+        filename,
+        json.dumps(data)
+    )
+    return f"odis/device/{filename}"
+
+def store_new_license(license_number=None, license_file=None):
+    filename = f"{license_number}.cert"
+    store_bytes(
+        "odis/license",
+        filename,
+        license_file.read()
+    )
+    return f"odis/device/{filename}"
+
