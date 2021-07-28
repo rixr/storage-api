@@ -37,6 +37,11 @@ def new_license(license_number):
         raise bottle.HTTPError(400)
     raise bottle.HTTPError(201, respuesta)
 
+@app.post("/asign/<license_number>/<device_serial>")
+def assign_license(license_number=None, device_serial=None):
+    raise bottle.HTTPError(501, "non")
+
+
 # EJEMPLO DE CURL PARA NUEVO REGISTRO
 # curl "http://localhost:8080/new?brand=getac&model=vas6150c&serial_number=1234567&date=2000-11-22"
 
