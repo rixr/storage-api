@@ -1,5 +1,12 @@
+import json
 from os import environ
 from pathlib import Path
+from modules.storage import *
+
+def store_register(brand=None, model=None, serial_number=None, date=None):
+    print("From module ./routes/odis_store")
+    print(brand, model, serial_number, date)
+    return "Success"
 
 def get_license_to_store(collection, filename):
     target = str(Path(collection) / filename)
