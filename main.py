@@ -19,10 +19,7 @@ app = bottle.Bottle()
 
 app.mount("/auth", routes.auth.app)
 app.mount("/storage", routes.storage.app)
-
-app.mount("/new", routes.odis_store.app)
-app.mount("/list", routes.odis_store.app)
-app.mount("/<serial_number>", routes.odis_store.app)
+app.mount("/odis", routes.odis_store.app)
 
 @app.get("/")
 def root_index(*args, **kwargs):
