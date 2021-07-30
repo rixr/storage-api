@@ -15,12 +15,13 @@ def new_device(*args, **kwargs):
         if any(key not in payload for key in obligatory_fields):
             raise Exception()
         dt.date.fromisoformat(payload['date'])
-        print("Datos validos")
+        print("Valid data")
         respuesta = store_new_device(**payload)
     except:
-        print("Datos invalidos")
+        print("Invalid data")
         raise bottle.HTTPError(400)
     raise bottle.HTTPError(201, respuesta)
+
 
 @app.post("/license/new/<license_number>")
 def new_license(license_number):
@@ -33,20 +34,26 @@ def new_license(license_number):
         print(license_file)
         respuesta = store_new_license(**payload)
     except:
-        print("Datos invalidos")
+        print("Invalid data")
         raise bottle.HTTPError(400)
     raise bottle.HTTPError(201, respuesta)
+
 
 @app.post("/asign/<license_number>/<device_serial>")
 def assign_license(license_number=None, device_serial=None):
     raise bottle.HTTPError(501, "non")
 
 
-# EJEMPLO DE CURL PARA NUEVO REGISTRO
-# curl "http://localhost:8080/new?brand=getac&model=vas6150c&serial_number=1234567&date=2000-11-22"
+@app.get("/list")
+def get_all_license(*args, **kwargs):
+    try:
+        respuesta = get_storage_device()
+    except:
+        raise bottle.HTTPError(501, "Error")
+    raise bottle.HTTPError(200, respuesta)
 
 
-@app.post("/<serial_number>")
+@app.get("/device/<serial_number>")
 def update_record(*args, serial_number=None, **kwargs):
     if not serial_number:
         raise bottle.HTTPError(404, "Missing serial number")
@@ -56,23 +63,8 @@ def update_record(*args, serial_number=None, **kwargs):
         date = str(payload['date'])
         # validación de fecha
         year, month, day = [int(x) for x in date.split("-")]
-        print("Datos validos")
+        print("Valid data")
     except:
-        print("Datos invalidos")
+        print("Invalid data")
         raise HTTPError(400)
-    raise bottle.HTTPError(501, "Error")
-
-# EJEMPLO DE CURL PARA ACTUALIZAR REGISTRO
-# curl "http://localhost:8080/1234567?date=2000-11-22"
-
-@app.get("/list")
-def get_all_info(*args, **kwargs):
-    payload = bottle.request.query.dict
-    print(payload)
-    raise bottle.HTTPError(501, "Error")
-
-@app.get("/<serial_number>")
-def get_serial_number(*args, **kwargs):
-    payload = bottle.request.query.dict
-    print(payload)
     raise bottle.HTTPError(501, "Error")
