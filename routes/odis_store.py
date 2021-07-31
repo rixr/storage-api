@@ -3,9 +3,7 @@ import bottle
 from modules.bottles import BottleJson
 from modules.odis_store import *
 
-
 app = BottleJson()
-
 
 @app.post("/device/new")
 def new_device(*args, **kwargs):
@@ -21,6 +19,7 @@ def new_device(*args, **kwargs):
         print("Invalid data")
         raise bottle.HTTPError(400)
     raise bottle.HTTPError(201, respuesta)
+
 
 
 @app.post("/license/new/<license_number>")
@@ -39,9 +38,11 @@ def new_license(license_number):
     raise bottle.HTTPError(201, respuesta)
 
 
+
 @app.post("/asign/<license_number>/<device_serial>")
 def assign_license(license_number=None, device_serial=None):
     raise bottle.HTTPError(501, "non")
+
 
 
 @app.get("/list")
@@ -53,8 +54,9 @@ def get_all_license(*args, **kwargs):
     raise bottle.HTTPError(200, respuesta)
 
 
+
 @app.get("/device/<serial_number>")
-def update_record(*args, serial_number=None, **kwargs):
+def get_license_by_sn(*args, serial_number=None, **kwargs):
     if not serial_number:
         raise bottle.HTTPError(404, "Missing serial number")
     payload = bottle.request.json
