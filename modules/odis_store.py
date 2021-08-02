@@ -1,35 +1,21 @@
 import datetime as dt
 import json
+import re
 from modules.storage import (
     store_string,
     store_bytes,
     query_storage
 )
 
-
-# ESPECIFICO
-def get_license_by_sn(serial_number=None):
-    query_result = query_storage(
-    "odis/license" # ruta donde se almacenan las licencias
+def assign_license2device(license_number=None, serial_number=None):
+    filename = f"{serial_number}_{license_number}.json"
+    data = dict(license_number=license_number, serial_number=serial_number)
+    store_string(
+        "odis/assign",
+        filename,
+        json.dumps(data)
     )
-    if serial_number is None:
-        return query_result["content"]
-    if serial_number is not None:
-        return [
-            r
-            for r in query_result["content"]
-            if serial_number in r
-        ]
-
-
-
-# TODO
-def get_storage_device(path=None):
-    query_result = query_storage(
-        "odis/device", #ruta en donde estan almacenadas los equipos
-    )
-    print(query_result)
-    return query_result['content']
+    return f"odis/assign/{filename}"
 
 
 
@@ -54,3 +40,29 @@ def store_new_license(license_number=None, license_file=None):
         license_file.read()
     )
     return f"odis/license/{filename}"
+
+
+
+# TODO
+def get_storage_device(path=None):
+    query_result = query_storage(
+        "odis/device", #ruta en donde estan almacenadas los equipos
+    )
+    print(query_result)
+    return query_result['content']
+
+
+
+# ESPECIFICO
+def get_license_by_sn(serial_number=None):
+    query_result = query_storage(
+        "odis/license", # ruta donde se almacenan las licencias
+    )
+    if serial_number is None:
+        return query_result["content"]
+    if serial_number is not None:
+        return [
+            r
+            for r in query_result["content"]
+            if serial_number in r
+        ]
