@@ -22,6 +22,22 @@ def new_device(*args, **kwargs):
 
 
 
+@app.post("/assign/<license_number>/<device_serial>")
+def assign_license(license_number=None, device_serial=None):
+    payload = bottle.request.json
+    obligatory_fields = ['device_serial', 'license_number']
+    try:
+        if any(key not in payload for key in obligatory_fields):
+            raise Exception("Invalid data")
+        print("Valid data")
+        respuesta = assign_license2device(**payload)
+    except:
+        print("Invalid data")
+        raise bottle.HTTPError(400)
+    raise bottle.HTTPError(201, respuesta)
+
+
+
 @app.post("/license/new/<license_number>")
 def new_license(license_number):
     try:
@@ -39,14 +55,8 @@ def new_license(license_number):
 
 
 
-@app.post("/asign/<license_number>/<device_serial>")
-def assign_license(license_number=None, device_serial=None):
-    raise bottle.HTTPError(501, "non")
-
-
-
 @app.get("/list")
-def get_all_license(*args, **kwargs):
+def get_all_devices(*args, **kwargs):
     try:
         respuesta = get_storage_device()
     except:
@@ -54,19 +64,10 @@ def get_all_license(*args, **kwargs):
     raise bottle.HTTPError(200, respuesta)
 
 
-
 @app.get("/device/<serial_number>")
-def get_license_by_sn(*args, serial_number=None, **kwargs):
-    if not serial_number:
-        raise bottle.HTTPError(404, "Missing serial number")
-    payload = bottle.request.json
-    print(payload)
+def license_per_sn(*args, code=None, **kwargs):
     try:
-        date = str(payload['date'])
-        # validación de fecha
-        year, month, day = [int(x) for x in date.split("-")]
-        print("Valid data")
+        respuesta = get_license_by_sn(serial_number=code)
     except:
-        print("Invalid data")
-        raise HTTPError(400)
-    raise bottle.HTTPError(501, "Error")
+        raise bottle.HTTPError(400)
+    raise bottle.HTTPError(200, respuesta)
