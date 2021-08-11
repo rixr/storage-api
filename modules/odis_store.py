@@ -7,21 +7,48 @@ from modules.storage import (
     query_storage
 )
 
-def assign_license2device(license_number=None, serial_number=None):
-    filename = f"{serial_number}_{license_number}.json"
-    data = dict(license_number=license_number, serial_number=serial_number)
-    store_string(
-        "odis/assign",
-        filename,
-        json.dumps(data)
+def assign_license2device(license_number = None, serial_number = None):
+    date = dt.date.today().isoformat()
+    device_query = get_storage_file(
+        "odis/device",
     )
-    return f"odis/assign/{filename}"
+    license_query = get_storage_file(
+        "odis/license",
+    )
+    if (license_number in license_query.values() and serial_number in device_query.values()):
+        filename = f"{license_number}_to_{serial_number}_at_{date}.json"
+        data = dict(license_number=license_number, serial_number=serial_number, date=date)
+        store_string(
+            "odis/assign",
+            filename,
+            json.dumps(data)
+        )
+        return f"odis/assign/{filename}"
 
 
 
-def store_new_device(brand=None, model=None, serial_number=None, date=None):
+def store_new_device(brand = None, model = None, serial_number = None, date = None):
+    ¨¨¨
+    Registra un nuevo equipo de diagnostico
+
+    Recibe diferentes parametros para que se pueda ejecutar exitosamente
+    - brand, cadena de texto que específica la marca del equipo de diagnostico
+    - model, cadena de texto que específica el modelo del equipo de diagnostico
+    - serial_number, cadena de texto que específica el umero de serie del equipo
+    - date, cadena de texto que específica la fecha en la que se esta haciendo
+    el registro del equipo con el formato yyyy-mm-dd
+
+    Curl para registrar un nuevo dispositivo
+    curl http://localhost:8080/odis/device/new \
+      -X POST \
+      -H 'Content-Type: application/json' \
+      -d '{"brand": "getac", "model": "vas6150c", "serial_number": "123456", "date": "2021-07-29"}'
+
+      Regresa un diccionario con los datos anteriormente especificados, con un
+      mesaje de "Datos validos".
+    ¨¨¨
     filename = f"{brand}_{model}_{serial_number}.json"
-    data = dict(brand=brand, model=model, serial_number=serial_number, date=date)
+    data = dict(brand = brand, model = model, serial_number = serial_number, date = date)
     store_string(
         "odis/device", # ruta en donde se almacenaran los equipos
         filename,
@@ -31,20 +58,22 @@ def store_new_device(brand=None, model=None, serial_number=None, date=None):
 
 
 
-def store_new_license(license_number=None, license_file=None):
+def store_new_license(license_number = None, license_file = None):
     date = dt.date.today().isoformat()
     filename = f"{license_number}_{date}.dat"
     store_bytes(
         "odis/license", # ruta en donde se almacenaran las licencias
         filename,
         license_file.read()
+        #if filename.filename.split(".")[-1] != "dat":
     )
+    print("Success")
     return f"odis/license/{filename}"
 
 
 
 # TODO
-def get_storage_device(path=None):
+def get_storage_device(path = None):
     query_result = query_storage(
         "odis/device", #ruta en donde estan almacenadas los equipos
     )
@@ -54,12 +83,10 @@ def get_storage_device(path=None):
 
 
 # ESPECIFICO
-def get_license_by_sn(serial_number=None):
+def get_license_by_sn(serial_number = None):
     query_result = query_storage(
-        "odis/license", # ruta donde se almacenan las licencias
+        F"odis/license/{serial_number}", # ruta donde se almacenan las licencias
     )
-    if serial_number is None:
-        return query_result["content"]
     if serial_number is not None:
         return [
             r
