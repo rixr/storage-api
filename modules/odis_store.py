@@ -94,6 +94,14 @@ def store_new_license(license_number = None, license_file = None):
 
 # TODO
 def get_storage_device(path = None):
+    ¨¨¨
+    busca todos los equipos registrados
+
+    CURL PARA OBTENER UNA LISTA DE TODOS LOS EQUIPOS REGISTRADOS
+    curl http://localhost:8080/odis/list -X GET
+
+    Regresa un diccionario con todos los equipos.
+    ¨¨¨
     query_result = query_storage(
         "odis/device", #ruta en donde estan almacenadas los equipos
     )
