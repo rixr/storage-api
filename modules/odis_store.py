@@ -59,6 +59,26 @@ def store_new_device(brand = None, model = None, serial_number = None, date = No
 
 
 def store_new_license(license_number = None, license_file = None):
+    ¨¨¨
+    Registra una nueva licencia
+
+    Recibe diferentes parametros para que se pueda ejecutar exitosamente debe
+    de contener los siguientes datos:
+    - brand, cadena de texto que específica la marca del equipo de diagnostico
+    - license_number, cadena de texto que especifica el numero o nombre que
+    llevara la licencia
+    - license_file, cadena de texto que especifica en donde se encuentra el
+    archivo, es decir la ruta, que contiene los datos de la licencia
+
+    Curl para registrar un nuevo dispositivo
+    curl http://localhost:8080/odis/license/new/license1 \
+      -X POST \
+      -H 'Content-Type: multipart/form-data' \
+      -F 'license_file=@C:/Users/Ricardo/license.txt'
+
+      Regresa un diccionario con los datos anteriormente especificados, con un
+      mesaje de "Datos validos".
+    ¨¨¨
     date = dt.date.today().isoformat()
     filename = f"{license_number}_{date}.dat"
     store_bytes(
