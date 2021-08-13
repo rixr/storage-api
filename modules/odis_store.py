@@ -112,8 +112,16 @@ def get_storage_device(path = None):
 
 # ESPECIFICO
 def get_license_by_sn(serial_number = None):
+    ¨¨¨
+    busca equipos registrados dado un numero de serie
+
+    CURL PARA OBTENER LAS LICENCIAS DADO UN NUMERO DE SERIE
+    curl http://localhost:8080/odis/device/license1 -X GET
+
+    Regresa un diccionario con el equipo deseado.
+    ¨¨¨
     query_result = query_storage(
-        F"odis/license/{serial_number}", # ruta donde se almacenan las licencias
+        "odis/license", # ruta donde se almacenan las licencias
     )
     if serial_number is not None:
         return [
