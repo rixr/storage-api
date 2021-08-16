@@ -332,7 +332,19 @@ Esos botones de edición nos redirigen hacia otra ventana, a la ventana de `/doc
     -H 'Content-Type: multipart/form-data' \
     -F 'license_file=@C:/Users/Ricardo/license.txt'
  ```
-3.
+
+<br>
+
+## El usuario desea ver todos los equipos registrados.
+- Obtendremos lo deseado haciendo la consulta a la direccion "http://localhost:8080/odis/list", se mostrara una lista con todos los registros previos.
+- Curl para obtener una lista de todos los equipos.
+ ```
+  curl http://localhost:8080/odis/list -X GET
+ ```
+
+<br>
+
+
 4.
 5.
 6.
