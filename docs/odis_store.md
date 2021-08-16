@@ -344,7 +344,11 @@ Esos botones de edición nos redirigen hacia otra ventana, a la ventana de `/doc
 
 <br>
 
-
-4.
+## El usuario desea ver la informacion de un equipo especifico.
+- Se podra consultar lo deseado a traves de la siguente direccion, donde se especifica cual es el numero de serie del equipo que se busca, por ejemplo, "http://localhost:8080/device/{NUMERO_DE_SERIE_DEL_EQUIPO}".
+- Curl para obtener equipo especifico.
+ ```
+  curl http://localhost:8080/odis/device/123456 -X GET
+ ```
 5.
 6.
