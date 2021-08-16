@@ -324,7 +324,7 @@ Esos botones de edición nos redirigen hacia otra ventana, a la ventana de `/doc
 <br>
 
 ## El usuario desea registrar una licencia.
-- Para ello se requiere especificar una ruta que contiene el archivo de la licencia que sera almacenada. Tambien se solicita el nombre que llevara la licencia, este es especificado en el enlace, es decir, "http://localhost:8080/odis/license/new/{NOMBRE DE LA LICENCIA}"
+- Para ello se requiere especificar una ruta que contiene el archivo de la licencia que sera almacenada. Tambien se solicita el nombre que llevara la licencia, este es especificado en el enlace, es decir, "http://localhost:8080/odis/license/new/{NOMBRE_DE_LA_LICENCIA}"
 - Curl para registrar un nuevo dispositivo
  ```
   curl http://localhost:8080/odis/license/new/license1 \
