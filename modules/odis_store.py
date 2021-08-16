@@ -8,6 +8,18 @@ from modules.storage import (
 )
 
 def assign_license2device(license_number = None, serial_number = None):
+    """
+    Asigna una licencia a un equipo de diagnostico.
+
+    CURL PARA ASIGNAR LICENCIA A EQUIPOS
+    curl http://localhost:8080/odis/assign/101187_2021-07-31/getac_vas6150c_123456 \
+      -X POST \
+      -H 'Content-Type: application/json' \
+      -d '{"license_number": "101187_2021-07-31.dat", "serial_number": "getac_vas6150c_123456.json"}'
+
+    Regresa un diccionario con los datos anteriormente especificados, con un
+    mesaje de "Datos validos".
+    """
     date = dt.date.today().isoformat()
     device_query = get_storage_file(
         "odis/device",
@@ -28,7 +40,7 @@ def assign_license2device(license_number = None, serial_number = None):
 
 
 def store_new_device(brand = None, model = None, serial_number = None, date = None):
-    ¨¨¨
+    """
     Registra un nuevo equipo de diagnostico
 
     Recibe diferentes parametros para que se pueda ejecutar exitosamente
@@ -46,8 +58,8 @@ def store_new_device(brand = None, model = None, serial_number = None, date = No
 
       Regresa un diccionario con los datos anteriormente especificados, con un
       mesaje de "Datos validos".
-    ¨¨¨
-    filename = f"{brand}_{model}_{serial_number}.json"
+    """
+    filename = f"{serial_number}.json"
     data = dict(brand = brand, model = model, serial_number = serial_number, date = date)
     store_string(
         "odis/device", # ruta en donde se almacenaran los equipos
@@ -59,7 +71,7 @@ def store_new_device(brand = None, model = None, serial_number = None, date = No
 
 
 def store_new_license(license_number = None, license_file = None):
-    ¨¨¨
+    """
     Registra una nueva licencia
 
     Recibe diferentes parametros para que se pueda ejecutar exitosamente debe
@@ -78,7 +90,7 @@ def store_new_license(license_number = None, license_file = None):
 
       Regresa un diccionario con los datos anteriormente especificados, con un
       mesaje de "Datos validos".
-    ¨¨¨
+    """
     date = dt.date.today().isoformat()
     filename = f"{license_number}_{date}.dat"
     store_bytes(
@@ -94,14 +106,14 @@ def store_new_license(license_number = None, license_file = None):
 
 # TODO
 def get_storage_device(path = None):
-    ¨¨¨
+    """
     busca todos los equipos registrados
 
     CURL PARA OBTENER UNA LISTA DE TODOS LOS EQUIPOS REGISTRADOS
     curl http://localhost:8080/odis/list -X GET
 
     Regresa un diccionario con todos los equipos.
-    ¨¨¨
+    """
     query_result = query_storage(
         "odis/device", #ruta en donde estan almacenadas los equipos
     )
@@ -112,14 +124,14 @@ def get_storage_device(path = None):
 
 # ESPECIFICO
 def get_license_by_sn(serial_number = None):
-    ¨¨¨
+    """
     busca equipos registrados dado un numero de serie
 
     CURL PARA OBTENER LAS LICENCIAS DADO UN NUMERO DE SERIE
     curl http://localhost:8080/odis/device/license1 -X GET
 
     Regresa un diccionario con el equipo deseado.
-    ¨¨¨
+    """
     query_result = query_storage(
         "odis/license", # ruta donde se almacenan las licencias
     )
