@@ -221,9 +221,8 @@ Estas pruebas se realizarán almacenando nuevos registros, algunos de ellos con 
 <br>
 
 ## Plan para el despliegue del proyecto de codigo
-
-# HOW TO RUN SGI SERVER
-winpty pipenv run start
+1. Correr servidor de ambiente con el siguiente comando:
+`winpty pipenv run start`
 
 
 <br>
@@ -303,10 +302,10 @@ Esos botones de edición nos redirigen hacia otra ventana, a la ventana de `/doc
 
 **Señalar el commit-hash que contiene la inclusión de estas Descripciones al documento, junto con los commits que contienen las imagenes.**
 
-| Concepto                 | Commit Hash                               |
-| ------------------------ | ----------------------------------------- |
-| Inclusión de mockups     | d37838c05276e244d79a4364ab49dd8ed6f0ece2  |
-| Descripción de mockups   | b97ce392a9b7472cf4eaa7180d8a389ea63a49d1  |
+| Concepto                 | Commit Hash                                   |
+| ------------------------ | --------------------------------------------- |
+| Inclusión de mockups     | d37838c05276e244d79a4364ab49dd8ed6f0ece2      |
+| Descripción de mockups   | git b97ce392a9b7472cf4eaa7180d8a389ea63a49d1  |
 
 <br>
 
@@ -322,7 +321,17 @@ Esos botones de edición nos redirigen hacia otra ventana, a la ventana de `/doc
     -d '{"brand": "getac", "model": "vas6150c", "serial_number": "123456", "date": "2021-07-29"}'
  ```
 
-2.
+<br>
+
+## El usuario desea registrar una licencia.
+- Para ello se requiere especificar una ruta que contiene el archivo de la licencia que sera almacenada. Tambien se solicita el nombre que llevara la licencia, este es especificado en el enlace, es decir, "http://localhost:8080/odis/license/new/{NOMBRE DE LA LICENCIA}"
+- Curl para registrar un nuevo dispositivo
+ ```
+  curl http://localhost:8080/odis/license/new/license1 \
+    -X POST \
+    -H 'Content-Type: multipart/form-data' \
+    -F 'license_file=@C:/Users/Ricardo/license.txt'
+ ```
 3.
 4.
 5.
