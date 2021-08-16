@@ -1,25 +1,3 @@
-- [ ] Implementar `BottleJson` como objeto para `app`.
-   `import bottle`
-   `from modules.bottles import BottleJson`
-   `app = BottleJson()`
-- [ ] Instalar aplicacion al router de la aplicacion principal de bottle.
-  - Agregar la declaracion de `import routes.<tu-modulo>` (sin `.py` obviamente).
-  - En la seccion donde se encuentran los `app.mount`, agregar la ruta que
-  ustedes usaran, (ejemplo `/example`), y su objeto `app`.
-  `app.mount("/storage", routes.storage.app)`
-
-- [ ] Recibir datos de la variable `bottle.request.json`
-a la variable `payload`, e imprimir, en caso de ser un verbo http
-que permita `body`.
-- [ ] Recibir datos de la variable `bottle.request.query`
-a la variable `payload`, e imprimir, en caso de ser un verbo http
-que _no_ permita `body`.
-- [ ] Validar la existencia y formato de los datos en la
-variable payload.
-
-
-
-
 # License Manager for ODIS
 > Autor: ***Ricardo Ramos***
 
@@ -243,7 +221,10 @@ Estas pruebas se realizarán almacenando nuevos registros, algunos de ellos con 
 <br>
 
 ## Plan para el despliegue del proyecto de codigo
-> Pendiente
+
+# HOW TO RUN SGI SERVER
+winpty pipenv run start
+
 
 <br>
 
@@ -326,3 +307,23 @@ Esos botones de edición nos redirigen hacia otra ventana, a la ventana de `/doc
 | ------------------------ | ----------------------------------------- |
 | Inclusión de mockups     | d37838c05276e244d79a4364ab49dd8ed6f0ece2  |
 | Descripción de mockups   | b97ce392a9b7472cf4eaa7180d8a389ea63a49d1  |
+
+<br>
+
+# Casos de uso
+
+## El usuario desea agregar un equipo de diagnóstico.
+- Para lograr exitosamente la accion se deben de ingresar los campos requeridos de marca, modelo, numero de serie y la fecha de registro. La estructura en la que se debe solicitar la accion es de la siguiente manera:
+- Curl para registrar un nuevo dispositivo
+ ```
+  curl http://localhost:8080/odis/device/new \
+    -X POST \
+    -H 'Content-Type: application/json' \
+    -d '{"brand": "getac", "model": "vas6150c", "serial_number": "123456", "date": "2021-07-29"}'
+ ```
+
+2.
+3.
+4.
+5.
+6.
