@@ -11,8 +11,12 @@ def assign_license2device(license_number = None, serial_number = None):
     """
     Asigna una licencia a un equipo de diagnostico.
 
+    Recibe dentro del URL los datos para poder hacer la asignacion correctamente.
+    - license_number, numero o nombre de la licencia
+    - serial_number, numero de serie del equipo de diagnóstico
+
     CURL PARA ASIGNAR LICENCIA A EQUIPOS
-    curl http://localhost:8080/odis/assign/101187_2021-07-31/getac_vas6150c_123456 \
+    curl http://localhost:8080/odis/assign/101187_2021-07-31.dat/getac_vas6150c_123456.json \
       -X POST \
       -H 'Content-Type: application/json' \
       -d '{"license_number": "101187_2021-07-31.dat", "serial_number": "getac_vas6150c_123456.json"}'
@@ -20,16 +24,23 @@ def assign_license2device(license_number = None, serial_number = None):
     Regresa un diccionario con los datos anteriormente especificados, con un
     mesaje de "Datos validos".
     """
+
     date = dt.date.today().isoformat()
+
+    # Hace una consulta a la ruta de almacenamiento de equipos de diagnostico
     device_query = get_storage_file(
         "odis/device",
     )
+    # Hace una consulta a la ruta de almacenamiento de licencias
     license_query = get_storage_file(
         "odis/license",
     )
+
+    # Evalua si los datos solicitados en el URL existen
     if (license_number in license_query.values() and serial_number in device_query.values()):
         filename = f"{license_number}_to_{serial_number}_at_{date}.json"
-        data = dict(license_number=license_number, serial_number=serial_number, date=date)
+        data = dict(license_number = license_number, serial_number = serial_number, date = date) # Datos que seran escritos dentro del json
+        # Ejecuta el guardado de los nuevos archivos json, en la nueva carpeta
         store_string(
             "odis/assign",
             filename,
@@ -59,8 +70,10 @@ def store_new_device(brand = None, model = None, serial_number = None, date = No
       Regresa un diccionario con los datos anteriormente especificados, con un
       mesaje de "Datos validos".
     """
+
     filename = f"{serial_number}.json"
-    data = dict(brand = brand, model = model, serial_number = serial_number, date = date)
+    data = dict(brand = brand, model = model, serial_number = serial_number, date = date) # Datos que seran escritos dentro del json
+    # Ejecuta el guardado de los nuevos archivos json, en la nueva carpeta
     store_string(
         "odis/device", # ruta en donde se almacenaran los equipos
         filename,
@@ -97,7 +110,6 @@ def store_new_license(license_number = None, license_file = None):
         "odis/license", # ruta en donde se almacenaran las licencias
         filename,
         license_file.read()
-        #if filename.filename.split(".")[-1] != "dat":
     )
     print("Success")
     return f"odis/license/{filename}"
@@ -135,6 +147,8 @@ def get_license_by_sn(serial_number = None):
     query_result = query_storage(
         "odis/license", # ruta donde se almacenan las licencias
     )
+
+    # Busqueda del numero de serie especificado en el URL
     if serial_number is not None:
         return [
             r
