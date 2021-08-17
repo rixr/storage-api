@@ -350,5 +350,35 @@ Esos botones de edición nos redirigen hacia otra ventana, a la ventana de `/doc
  ```
   curl http://localhost:8080/odis/device/123456 -X GET
  ```
-5.
-6.
+
+ <br>
+
+## El usuario desea asignar una licencia a un equipo de diagnostico.
+- Para realizarlo de manera correcta se debe de especificar dentro del URL el numeor de licencia y el numero de serie del equipo.
+- Curl para asignar una licencia a un equipo de diagnostico.
+ ```
+  curl http://localhost:8080/odis/assign/101187_2021-07-31.dat/getac_vas6150c_123456.json \
+    -X POST \
+    -H 'Content-Type: application/json' \
+    -d '{"license_number": "101187_2021-07-31.dat", "serial_number": "getac_vas6150c_123456.json"}'
+ ```
+
+ <br>
+
+# Documentación para futuros cambios en el backend
+El primero de los cambios y que es una de las funciones mas utiles del proyecto es la de asignar una licencia registrada a un equipo de diagnostico que al igual esta registrado previamente, esto es obligatorio puesto a que se trata solo de relacionar ambos registros. A continuacion se explica la funcionalidad que se desea:
+- Esta funcion recive en el URL dos datos, el nombre de la licencia y el numero de serie del equipo al que se relacionara.
+- Una vez que estos datos son recibidos se debe de validar su existencia dentro de los directorios de almacenamiento, ubicados en _`./storage/odis/device/`_ para los equipo de diagnostico y en el directorio _`./storage/odis/license/`_ para las licencias.
+- Si ambos registros existen entonces un nuevo archivo `.json` sera almacenado dentro de la nueva ruta _`./storage/odis/assign/`_, el contenido del archivo json sera un diccionario con:
+  - license_number, el numero o nombre de licencia que se asignara
+  - serial_number, el equipo a la cual se ligara la licencia
+  - date, la fecha en la que se esta haciendo la asignacion
+
+En caso de que uno de los dos datos solicitados no exita se regresara un mensaje de error con el mensaje de "Invalid data".
+
+La funcion "assign_license2device" se encuentra en el siguiente archivo _`./modules/odis_store.py`_, ya esta estructurada y con un breve docstring que detalla un poco mas de lo que se desea. Su funcion _dummy_ "assign_license" esta escrito en el archivo _`./routes/odis_store.py`_.
+
+<br>
+
+# Planeacion de desarrollo del frontend
+> Pendiente
