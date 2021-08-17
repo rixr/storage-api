@@ -392,14 +392,14 @@ Primeramente mecionar que sin el correcto funcionamiento del backend no se puede
 
 La pagina principal del proyecto sera una ventana en la cual se presentan tres botones, uno para ¨agregar equipos¨, uno para ¨agregar licencias¨ y otro para ¨consultar registros¨, cada uno de ellos nos lleva a ventanas diferente y con acciones diferentes:
 - **Agregar equipo**
-Al dar clic en este botón nos redirecciona a una ventana donde se presenta un formulario con campos de cadena de texto, todos obligatorios, estos son, Marca, Modelo, Número de Serie y Fecha en el que se esta haciendo el registro. En la parte inferior se encuentra un botón que procede a guardar los campos requeridos. Si alguno de los datos no es ingresado se levantará un error con el mensajes "Invalid data"
+: Al dar clic en este botón nos redirecciona a una ventana donde se presenta un formulario con campos de cadena de texto, todos obligatorios, estos son, Marca, Modelo, Número de Serie y Fecha en el que se esta haciendo el registro. En la parte inferior se encuentra un botón que procede a guardar los campos requeridos. Si alguno de los datos no es ingresado se levantará un error con el mensajes "Invalid data"
 
 <br>
 
 - **Agregar licencia**
-Se presenta un formulario con un campo para anadir archivos, en el cual se indica la ruta donde se encuentra el archivo de licencia. En la parte inferior se encuentra un botón que procede a guardar el archivo seleccionado. De no seleccionar algun archivo que cumpla con las vaidaciones necesarias se levantara un error con su respectivo mensaje de error.
+: Se presenta un formulario con un campo para anadir archivos, en el cual se indica la ruta donde se encuentra el archivo de licencia. En la parte inferior se encuentra un botón que procede a guardar el archivo seleccionado. De no seleccionar algun archivo que cumpla con las vaidaciones necesarias se levantara un error con su respectivo mensaje de error.
 
 <br>
 
-- **Consultar registros***  
-Se muestra una lista con todos los registros previos de los equipos de diagnóstico, mostrando la fecha en la que se registraron y la licencia que se le fue asignada.
+- **Consultar registros**  
+: Se muestra una lista con todos los registros previos de los equipos de diagnóstico, mostrando la fecha en la que se registraron y la licencia que se le fue asignada.
