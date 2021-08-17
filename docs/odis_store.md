@@ -58,7 +58,7 @@ A continuación se explica las diferentes maneras en las que se puede interactua
 <br>
 
 ## Rutas HTTP
-En la siguiente tabla se específica cuales son las rutas con las que cuenta este proyecto, ademas del método HTTP que se utiliza, la ruta como tal y una breve descripción de su funcion.
+En la siguiente tabla se específica cuales son las rutas con las que cuenta este proyecto, ademas del método HTTP que se utiliza, la ruta como tal y una breve descripción de su función.
 | Método | Path                          | Descripción                                         |
 | -------|-------------------------------|-----------------------------------------------------|
 | POST   | `/odis-store/new`             | Almacena nuevos registros de equipos de diagnóstico |
@@ -282,7 +282,7 @@ Estas pruebas se realizarán almacenando nuevos registros, algunos de ellos con 
 
 ## Descripción de mockups.
 
-En la ventana `/docs/assets/odis-store_0001_new-visualization.png` se muestra la vista previa de nuevos registros de equipos de diagnóstico, se solicita a traves de campos de entradas los datos necesarios para un almacenamiento exitos, se solictan los siguuientes datos, la marca del equipo, el modelo de este, su número de serie, seleccionar un archivo local que debe tener un formato estricto `.dat` y con un tamaño menor a 2MB, de otro modo no se aceptara el archivo, finalmete seleccionar la fecha en la que se esta guardando ese archivo de licencia. El botón `Registrar` ejecuta la funcion de almacenamiento.
+En la ventana `/docs/assets/odis-store_0001_new-visualization.png` se muestra la vista previa de nuevos registros de equipos de diagnóstico, se solicita a traves de campos de entradas los datos necesarios para un almacenamiento exitos, se solictan los siguuientes datos, la marca del equipo, el modelo de este, su número de serie, seleccionar un archivo local que debe tener un formato estricto `.dat` y con un tamaño menor a 2MB, de otro modo no se aceptara el archivo, finalmete seleccionar la fecha en la que se esta guardando ese archivo de licencia. El botón `Registrar` ejecuta la función de almacenamiento.
 
 ![New register visualization](https://github.com/rixr/storage-api/blob/master/docs/assets/odis-store_0001_new-visualization.png?raw=true)
 
@@ -296,7 +296,7 @@ En el mockup `/docs/assets/odis-store_0002_list-visualization.png` se observa un
 <br>
 <br>
 
-Esos botones de edición nos redirigen hacia otra ventana, a la ventana de `/docs/assets/odis-store_0003_update-visualization.png` aca se muestran los datos basicos del equipo seleccionado, pero los campos de `Licencia` y `Fecha` son modificables; El proposito de esta ventan es, ademas de ver los datos individuales del equipo poder actualizar los campos anteriormente mencionados. Para cambiar un archivo de licencia debes de buscarla en tu computadora, seleccionarlo y notaras que se reemplaza el archivo, despues debes de cambiar el campo de fecha, una vez realizado el proceso da click al botón de `Actualizar`, este ejecuta una funcion que hace los cambios y los guarda. Si el archivo que se intenta cambiar cumple las validaciones de formato y tamaño el cambio sera exito, de otro modo arrojara un mensaje de fallo.
+Esos botones de edición nos redirigen hacia otra ventana, a la ventana de `/docs/assets/odis-store_0003_update-visualization.png` aca se muestran los datos basicos del equipo seleccionado, pero los campos de `Licencia` y `Fecha` son modificables; El proposito de esta ventan es, ademas de ver los datos individuales del equipo poder actualizar los campos anteriormente mencionados. Para cambiar un archivo de licencia debes de buscarla en tu computadora, seleccionarlo y notaras que se reemplaza el archivo, despues debes de cambiar el campo de fecha, una vez realizado el proceso da click al botón de `Actualizar`, este ejecuta una función que hace los cambios y los guarda. Si el archivo que se intenta cambiar cumple las validaciones de formato y tamaño el cambio sera exito, de otro modo arrojara un mensaje de fallo.
 
 ![Updete register visualization](https://github.com/rixr/storage-api/blob/master/docs/assets/odis-store_0003_update-visualization.png?raw=true)
 
@@ -312,7 +312,7 @@ Esos botones de edición nos redirigen hacia otra ventana, a la ventana de `/doc
 # Casos de uso
 
 ## El usuario desea agregar un equipo de diagnóstico.
-- Para lograr exitosamente la accion se deben de ingresar los campos requeridos de marca, modelo, numero de serie y la fecha de registro. La estructura en la que se debe solicitar la accion es de la siguiente manera:
+- Para lograr exitosamente la acción se deben de ingresar los campos requeridos de marca, modelo, número de serie y la fecha de registro. La estructura en la que se debe solicitar la acción es de la siguiente manera:
 - Curl para registrar un nuevo dispositivo
  ```
   curl http://localhost:8080/odis/device/new \
@@ -345,7 +345,7 @@ Esos botones de edición nos redirigen hacia otra ventana, a la ventana de `/doc
 <br>
 
 ## El usuario desea ver la informacion de un equipo especifico.
-- Se podra consultar lo deseado a traves de la siguente direccion, donde se especifica cual es el numero de serie del equipo que se busca, por ejemplo, "http://localhost:8080/device/{NUMERO_DE_SERIE_DEL_EQUIPO}".
+- Se podra consultar lo deseado a traves de la siguente direccion, donde se especifica cual es el número de serie del equipo que se busca, por ejemplo, "http://localhost:8080/device/{NUMERO_DE_SERIE_DEL_EQUIPO}".
 - Curl para obtener equipo especifico.
  ```
   curl http://localhost:8080/odis/device/123456 -X GET
@@ -354,8 +354,8 @@ Esos botones de edición nos redirigen hacia otra ventana, a la ventana de `/doc
  <br>
 
 ## El usuario desea asignar una licencia a un equipo de diagnostico.
-- Para realizarlo de manera correcta se debe de especificar dentro del URL el numeor de licencia y el numero de serie del equipo.
-- Curl para asignar una licencia a un equipo de diagnostico.
+- Para realizarlo de manera correcta se debe de especificar dentro del URL el numeor de licencia y el número de serie del equipo.
+- Curl para asignar una licencia a un equipo de diagnóstico.
  ```
   curl http://localhost:8080/odis/assign/101187_2021-07-31.dat/getac_vas6150c_123456.json \
     -X POST \
@@ -366,24 +366,25 @@ Esos botones de edición nos redirigen hacia otra ventana, a la ventana de `/doc
  <br>
 
 # Documentación para futuros cambios en el backend
-El primero de los cambios y que es una de las funciones mas utiles del proyecto es la de asignar una licencia registrada a un equipo de diagnostico que al igual esta registrado previamente, esto es obligatorio puesto a que se trata solo de relacionar ambos registros. A continuacion se explica la funcionalidad que se desea:
-- Esta funcion recive en el URL dos datos, el nombre de la licencia y el numero de serie del equipo al que se relacionara.
-- Una vez que estos datos son recibidos se debe de validar su existencia dentro de los directorios de almacenamiento, ubicados en _`./storage/odis/device/`_ para los equipo de diagnostico y en el directorio _`./storage/odis/license/`_ para las licencias.
-- Si ambos registros existen entonces un nuevo archivo `.json` sera almacenado dentro de la nueva ruta _`./storage/odis/assign/`_, el contenido del archivo json sera un diccionario con:
-  - license_number, el numero o nombre de licencia que se asignara
+- El primero de los cambios y que es una de las funciones mas utiles del proyecto es la de asignar una licencia registrada a un equipo de diagnóstico que al igual esta registrado previamente, esto es obligatorio puesto a que se trata solo de relacionar ambos registros. A continuación se explica la funcionalidad que se desea:
+  - Esta función recibe en el URL dos datos, el nombre de la licencia y el número de serie del equipo al que se relacionará.
+  - Una vez que estos datos son recibidos se debe de validar su existencia dentro de los directorios de almacenamiento, ubicados en _`./storage/odis/device/`_ para los equipo de diagnóstico y en el directorio _`./storage/odis/license/`_ para las licencias.
+- Si ambos registros existen entonces un nuevo archivo `.json` será almacenado dentro de la nueva ruta _`./storage/odis/assign/`_, el contenido del archivo .json será un diccionario con:
+  - license_number, el número o nombre de licencia que se asignará
   - serial_number, el equipo a la cual se ligara la licencia
-  - date, la fecha en la que se esta haciendo la asignacion
+  - date, la fecha en la que se esta haciendo la asignación
 
-En caso de que uno de los dos datos solicitados no exita se regresara un mensaje de error con el mensaje de "Invalid data".
+En caso de que uno de los dos datos solicitados no exita se regresará un de error con el mensaje de "Invalid data".
 
-La funcion "assign_license2device" se encuentra en el siguiente archivo _`./modules/odis_store.py`_, ya esta estructurada y con un breve docstring que detalla un poco mas de lo que se desea. Su funcion _dummy_ "assign_license" esta escrito en el archivo _`./routes/odis_store.py`_.
+La función "assign_license2device" se encuentra en el siguiente archivo _`./modules/odis_store.py`_, ya esta estructurada y con un breve docstring que detalla un poco mas de lo que se desea. Su función _dummy_ "assign_license" esta escrito en el archivo _`./routes/odis_store.py`_.
 
+<br>
 
-Otro de los cambios son las validaciones alrededor del archivo de la licencia, basicamnete seria la validacion de extension y la validacion del tamaño del archivo.
-- Para la validacion de extensión de archivo, unicamente se aceptaran archivo con la extensión `.dat`, de lo contrario se levantara un error con el mensaje de ¨Invalid data - File Type¨.
-- Para la validacion de tamaño de archivo se requiere que este no exceda los 2MB, de lo contrario se levantara un error con el mensaje de ¨Invalid data - File Size¨.
+Otro de los cambios son las validaciones alrededor del archivo de la licencia, básicamente seria la validación de extensioón y la validación del tamaño del archivo.
+- Para la validación de extensión de archivo, unicamente se aceptaran archivo con la extensión `.dat`, de lo contrario se levantara un error con el mensaje de ¨Invalid data - File Type¨.
+- Para la validación de tamaño de archivo se requiere que este no exceda los 2MB, de lo contrario se levantara un error con el mensaje de ¨Invalid data - File Size¨.
 
-Estas validaciones deberan estar implementadas en la funcion ¨store_new_license¨ que es la encargada de el almacenamiento de los archivos de licencia, dentro del archivo _`./modules/odis_store.py`_.
+Estas validaciones deberan estar implementadas en la función ¨store_new_license¨ que es la encargada de el almacenamiento de los archivos de licencia, esta se encuentra dentro del archivo _`./modules/odis_store.py`_.
 <br>
 
 # Planeacion de desarrollo del frontend
