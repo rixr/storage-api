@@ -378,6 +378,12 @@ En caso de que uno de los dos datos solicitados no exita se regresara un mensaje
 
 La funcion "assign_license2device" se encuentra en el siguiente archivo _`./modules/odis_store.py`_, ya esta estructurada y con un breve docstring que detalla un poco mas de lo que se desea. Su funcion _dummy_ "assign_license" esta escrito en el archivo _`./routes/odis_store.py`_.
 
+
+Otro de los cambios son las validaciones alrededor del archivo de la licencia, basicamnete seria la validacion de extension y la validacion del tamaño del archivo.
+- Para la validacion de extensión de archivo, unicamente se aceptaran archivo con la extensión `.dat`, de lo contrario se levantara un error con el mensaje de ¨Invalid data - File Type¨.
+- Para la validacion de tamaño de archivo se requiere que este no exceda los 2MB, de lo contrario se levantara un error con el mensaje de ¨Invalid data - File Size¨.
+
+Estas validaciones deberan estar implementadas en la funcion ¨store_new_license¨ que es la encargada de el almacenamiento de los archivos de licencia, dentro del archivo _`./modules/odis_store.py`_.
 <br>
 
 # Planeacion de desarrollo del frontend
