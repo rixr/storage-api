@@ -59,12 +59,13 @@ A continuación se explica las diferentes maneras en las que se puede interactua
 
 ## Rutas HTTP
 En la siguiente tabla se específica cuales son las rutas con las que cuenta este proyecto, ademas del método HTTP que se utiliza, la ruta como tal y una breve descripción de su función.
-| Método | Path                          | Descripción                                         |
-| -------|-------------------------------|-----------------------------------------------------|
-| POST   | `/odis-store/new`             | Almacena nuevos registros de equipos de diagnóstico |
-| GET    | `/odis-store/list`            | Muestra todos los registros                         |
-| GET    | `/odis-store/<serial_number>` | Muestra toda la información del registro deseado    |
-| POST   | `/odis-store/<serial_number>` | Actaliza la información del registro deseado        |
+| Método | Path                                            | Descripción                                         |
+| -------|-------------------------------------------------|-----------------------------------------------------|
+| POST   | `/odis/device/new`                              | Almacena nuevos equipos de diagnóstico              |
+| POST   | `/odis/license/new/<license_number>`            | Almacena nuevas licencias                           |
+| GET    | `/odis/list`                                    | Muestra todos los equipos de diagnostico            |
+| POST   | `/odis/assign/<license_number>/<serial_number>` | Asigna una licencia a un equipo de diagnostico      |
+| POST   | `/odis/device/<serial_number>`                  | Muestra toda la información del registro deseado    |
 
 <br>
 
@@ -318,7 +319,7 @@ Esos botones de edición nos redirigen hacia otra ventana, a la ventana de `/doc
   curl http://localhost:8080/odis/device/new \
     -X POST \
     -H 'Content-Type: application/json' \
-    -d '{"brand": "getac", "model": "vas6150c", "serial_number": "123456", "date": "2021-07-29"}'
+    -d '{"brand": "getac", "model": "vas6150c", "serial_number": "123456", "date": "2021-08-17"}'
  ```
 
 <br>
@@ -327,7 +328,7 @@ Esos botones de edición nos redirigen hacia otra ventana, a la ventana de `/doc
 - Para ello se requiere especificar una ruta que contiene el archivo de la licencia que sera almacenada. Tambien se solicita el nombre que llevara la licencia, este es especificado en el enlace, es decir, "http://localhost:8080/odis/license/new/{NOMBRE_DE_LA_LICENCIA}"
 - Curl para registrar un nuevo dispositivo
  ```
-  curl http://localhost:8080/odis/license/new/license1 \
+  curl http://localhost:8080/odis/license/new/license_214 \
     -X POST \
     -H 'Content-Type: multipart/form-data' \
     -F 'license_file=@C:/Users/Ricardo/license.txt'
@@ -385,6 +386,7 @@ Otro de los cambios son las validaciones alrededor del archivo de la licencia, b
 - Para la validación de tamaño de archivo se requiere que este no exceda los 2MB, de lo contrario se levantara un error con el mensaje de ¨Invalid data - File Size¨.
 
 Estas validaciones deberan estar implementadas en la función ¨store_new_license¨ que es la encargada de el almacenamiento de los archivos de licencia, esta se encuentra dentro del archivo _`./modules/odis_store.py`_.
+
 <br>
 
 # Planeación de desarrollo del frontend
