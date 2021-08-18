@@ -65,7 +65,7 @@ En la siguiente tabla se específica cuales son las rutas con las que cuenta est
 | POST   | `/odis/license/new/<license_number>`            | Almacena nuevas licencias                           |
 | GET    | `/odis/list`                                    | Muestra todos los equipos de diagnostico            |
 | POST   | `/odis/assign/<license_number>/<serial_number>` | Asigna una licencia a un equipo de diagnostico      |
-| POST   | `/odis/device/<serial_number>`                  | Muestra toda la información del registro deseado    |
+| GET    | `/odis/device/<serial_number>`                  | Muestra toda la información del registro deseado    |
 
 <br>
 
