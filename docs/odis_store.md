@@ -392,6 +392,8 @@ Estas validaciones deberan estar implementadas en la función ¨store_new_licens
 # Planeación de desarrollo del frontend
 Primeramente mecionar que sin el correcto funcionamiento del backend no se puede avanzar al desarrollo de frontend, sin embargo, la planeación del mismo es de suma importancia para este proyecto debido a que se espera hacer el despliegue en nube para el futuro.
 
+![Index visualization](https://github.com/rixr/storage-api/blob/master/docs/assets/odis-store_0004_index-visualization.png?raw=true)
+
 La pagina principal del proyecto sera una ventana en la cual se presentan tres botones, uno para ¨agregar equipos¨, uno para ¨agregar licencias¨ y otro para ¨consultar registros¨, cada uno de ellos nos lleva a ventanas diferente y con acciones diferentes:
 - **Agregar equipo**  
 Al dar clic en este botón nos redirecciona a una ventana donde se presenta un formulario con campos de cadena de texto, todos obligatorios, estos son, Marca, Modelo, Número de Serie y Fecha en el que se esta haciendo el registro. En la parte inferior se encuentra un botón que procede a guardar los campos requeridos. Si alguno de los datos no es ingresado se levantará un error con el mensajes "Invalid data"
