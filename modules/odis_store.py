@@ -1,3 +1,4 @@
+import os
 import datetime as dt
 import json
 import re
@@ -7,46 +8,35 @@ from modules.storage import (
     query_storage
 )
 
-def assign_license2device(license_number = None, serial_number = None):
+def store_new_license(license_number = None, license_file = None):
     """
-    Asigna una licencia a un equipo de diagnostico.
+    Registra una nueva licencia
 
-    Recibe dentro del URL los datos para poder hacer la asignacion correctamente.
-    - license_number, numero o nombre de la licencia
-    - serial_number, numero de serie del equipo de diagnóstico
+    Recibe diferentes parametros para que se pueda ejecutar exitosamente debe
+    de contener los siguientes datos:
+    - brand, cadena de texto que específica la marca del equipo de diagnostico
+    - license_number, cadena de texto que especifica el numero o nombre que
+    llevara la licencia
+    - license_file, cadena de texto que especifica en donde se encuentra el
+    archivo, es decir la ruta, que contiene los datos de la licencia
 
-    CURL PARA ASIGNAR LICENCIA A EQUIPOS
-    curl http://localhost:8080/odis/assign/101187_2021-07-31.dat/getac_vas6150c_123456.json \
+    Curl para registrar un nuevo dispositivo
+    curl http://localhost:8080/odis/license/new/license_12 \
       -X POST \
-      -H 'Content-Type: application/json' \
-      -d '{"license_number": "101187_2021-07-31.dat", "serial_number": "getac_vas6150c_123456.json"}'
+      -H 'Content-Type: multipart/form-data' \
+      -F 'license_file=@C:/Users/Ricardo/license.txt'
 
-    Regresa un diccionario con los datos anteriormente especificados, con un
-    mesaje de "Datos validos".
+      Regresa un diccionario con los datos anteriormente especificados, con un
+      mesaje de "Datos validos".
     """
-
     date = dt.date.today().isoformat()
-
-    # Hace una consulta a la ruta de almacenamiento de equipos de diagnostico
-    device_query = get_storage_file(
-        "odis/device",
+    filename = f"{license_number}_{date}.dat"
+    store_bytes(
+        "odis/license", # ruta en donde se almacenaran las licencias
+        filename,
+        license_file.read()
     )
-    # Hace una consulta a la ruta de almacenamiento de licencias
-    license_query = get_storage_file(
-        "odis/license",
-    )
-
-    # Evalua si los datos solicitados en el URL existen
-    if (license_number in license_query.values() and serial_number in device_query.values()):
-        filename = f"{license_number}_to_{serial_number}_at_{date}.json"
-        data = dict(license_number = license_number, serial_number = serial_number, date = date) # Datos que seran escritos dentro del json
-        # Ejecuta el guardado de los nuevos archivos json, en la nueva carpeta
-        store_string(
-            "odis/assign",
-            filename,
-            json.dumps(data)
-        )
-        return f"odis/assign/{filename}"
+    return f"odis/license/{filename}"
 
 
 
@@ -80,39 +70,6 @@ def store_new_device(brand = None, model = None, serial_number = None, date = No
         json.dumps(data)
     )
     return f"odis/device/{filename}"
-
-
-
-def store_new_license(license_number = None, license_file = None):
-    """
-    Registra una nueva licencia
-
-    Recibe diferentes parametros para que se pueda ejecutar exitosamente debe
-    de contener los siguientes datos:
-    - brand, cadena de texto que específica la marca del equipo de diagnostico
-    - license_number, cadena de texto que especifica el numero o nombre que
-    llevara la licencia
-    - license_file, cadena de texto que especifica en donde se encuentra el
-    archivo, es decir la ruta, que contiene los datos de la licencia
-
-    Curl para registrar un nuevo dispositivo
-    curl http://localhost:8080/odis/license/new/license1 \
-      -X POST \
-      -H 'Content-Type: multipart/form-data' \
-      -F 'license_file=@C:/Users/Ricardo/license.txt'
-
-      Regresa un diccionario con los datos anteriormente especificados, con un
-      mesaje de "Datos validos".
-    """
-    date = dt.date.today().isoformat()
-    filename = f"{license_number}_{date}.dat"
-    store_bytes(
-        "odis/license", # ruta en donde se almacenaran las licencias
-        filename,
-        license_file.read()
-    )
-    print("Success")
-    return f"odis/license/{filename}"
 
 
 
@@ -155,3 +112,46 @@ def get_license_by_sn(serial_number = None):
             for r in query_result["content"]
             if serial_number in r
         ]
+
+
+
+def assign_license2device(license_number = None, serial_number = None):
+    """
+    Asigna una licencia a un equipo de diagnostico.
+
+    Recibe dentro del URL los datos para poder hacer la asignacion correctamente.
+    - license_number, numero o nombre de la licencia
+    - serial_number, numero de serie del equipo de diagnóstico
+
+    CURL PARA ASIGNAR LICENCIA A EQUIPOS
+    curl http://localhost:8080/odis/assign/101187_2021-07-31.dat/getac_vas6150c_123456.json \
+      -X POST \
+      -H 'Content-Type: application/json' \
+      -d '{"license_number": "101187_2021-07-31.dat", "serial_number": "getac_vas6150c_123456.json"}'
+
+    Regresa un diccionario con los datos anteriormente especificados, con un
+    mesaje de "Datos validos".
+    """
+
+    date = dt.date.today().isoformat()
+
+    # Hace una consulta a la ruta de almacenamiento de equipos de diagnostico
+    device_query = get_storage_file(
+        "odis/device",
+    )
+    # Hace una consulta a la ruta de almacenamiento de licencias
+    license_query = get_storage_file(
+        "odis/license",
+    )
+
+    # Evalua si los datos solicitados en el URL existen
+    if (license_number in license_query.values() and serial_number in device_query.values()):
+        filename = f"{license_number}_to_{serial_number}_at_{date}.json"
+        data = dict(license_number = license_number, serial_number = serial_number, date = date) # Datos que seran escritos dentro del json
+        # Ejecuta el guardado de los nuevos archivos json, en la nueva carpeta
+        store_string(
+            "odis/assign",
+            filename,
+            json.dumps(data)
+        )
+        return f"odis/assign/{filename}"
